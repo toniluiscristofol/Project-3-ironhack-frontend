@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
-import CreateTodo from '../../components/CreateTodo/CreateTodo';
+import CreateTodo from '../../components/CreateTodo/CreateParty';
 import Text from '../../components/Text';
 import Todo from '../../components/Todo/Todo';
 import { withAuth } from '../../context/auth.context';
-import TodoService from '../../services/todos.service'
+import PartyService from '../../services/parties.service'
 import SCTodoList from './TodoList.styled';
 
-class TodoList extends Component {
+class PartyList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: []
+      parties: []
     }
-    this.todoService = new TodoService();
+    this.partyService = new PartyService();
     // this.refreshState = this.refreshState.bind(this);
   }
 
   refreshState() {
-    this.todoService.get()
+    this.partyService.get()
       .then(response => {
         console.log(response.data);
-        this.setState({ todos: response.data });
+        this.setState({ parties: response.data });
       })
       .catch(err => console.error(err))
   }
@@ -30,12 +30,12 @@ class TodoList extends Component {
   }
 
   displayTodos(){
-    const { todos } = this.state;
-    return todos.map(todo => {
+    const { parties } = this.state;
+    return parties.map(party => {
       // <Todo key={todo.id} todo={todo}/>
       // <Todo key={todo.id} name={todo.name} description={todo.description} done={todo.done} .../>
       return (
-        <Todo refreshState={() => this.refreshState()} key={todo.id} {...todo}/>
+        <Todo refreshState={() => this.refreshState()} key={party.id} {...party}/>
       )
     })
   }
@@ -45,13 +45,13 @@ class TodoList extends Component {
   }
 
   render() {
-    const { todos } = this.state;
+    const { parties } = this.state;
     return (
       <SCTodoList>
         <Text className="close-session" onClick={() => this.handleLogout()} as="p" color="black">Cerrar sesión</Text>
         <div className="card">
           <Text size="l" weight="superDisplay" color="black">
-            {todos.length === 0 ? "Ups, no tienes ningún todo" : todos.length === 1 ? "Estás más cerca de no dejarte nada, todo" : "Perfecto, sigue añadiento todos"}
+            {parties.length === 0 ? "Ups, no tienes ningún todo" : parties.length === 1 ? "Estás más cerca de no dejarte nada, todo" : "Perfecto, sigue añadiento todos"}
           </Text>
           {
             this.displayTodos()
@@ -63,4 +63,4 @@ class TodoList extends Component {
   }
 }
 
-export default withAuth(TodoList);
+export default withAuth(PartyList);

@@ -1,5 +1,5 @@
 import React from 'react'
-import TodoService from '../../services/todos.service'
+import TodoService from '../../services/parties.service'
 import Text from '../Text'
 import SCTodo from './Todo.styled'
 
