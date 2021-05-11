@@ -5,14 +5,16 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import TodoList from './pages/TodoList/TodoList';
+import PartyList from './pages/PartyList/PartyList';
+import CreateParty from './components/CreateParty/CreateParty';
 
 function App() {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
-        <PrivateRoute path="/todo-list" exact component={TodoList} />
+        <AnonRoute path = "/create-party" component={CreateParty}/>
+        <AnonRoute path="/todo-list" exact component={PartyList} />
         <AnonRoute exact path="/signup" component={Signup} redirectPath="/todo-list" />
         <AnonRoute exact path="/login" component={Login} />
       </Switch>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import CreateTodo from '../../components/CreateTodo/CreateParty';
 import Text from '../../components/Text';
 import Todo from '../../components/Todo/Todo';
 import { withAuth } from '../../context/auth.context';
@@ -56,7 +55,7 @@ class PartyList extends Component {
           {
             this.displayTodos()
           }
-          <CreateTodo refreshState={() => this.refreshState()} />
+          
         </div>
       </SCTodoList>
     )

@@ -17,10 +17,12 @@ export default class CreateParty extends Component {
     this.state = {
       fields: {
         name: "",
-        date: "",
         city:"",
         street:"",
-        age: 0
+        date:"",
+        age: 0,
+        price: 0,
+        ageInterval:""
       }, 
       errors: {
         name: null
@@ -42,10 +44,12 @@ export default class CreateParty extends Component {
       this.setState({
         fields: {
           name: "",
-          date: "",
           city:"",
           street:"",
-          age: 0
+          date:"",
+          age: 0,
+          price: 0,
+          ageInterval:""
         }, 
         errors: {
           name: null
@@ -79,7 +83,10 @@ export default class CreateParty extends Component {
         <input type="text" value={fields.city} onChange={(e) => this.handleChange(e)} name="city" />
         <input type="text" value={fields.street} onChange={(e) => this.handleChange(e)} name="street" />
         <input type="text" value={fields.date} onChange={(e) => this.handleChange(e)} name="date" />
+        <input type="text" value={fields.musicType} onChange={(e) => this.handleChange(e)} name="musicType" />
+        <input type="text" value={fields.ageInterval} onChange={(e) => this.handleChange(e)} name="ageInterval" />
         <input type="number" value={fields.age} onChange={(e) => this.handleChange(e)} name="age" />
+        <input type="number" value={fields.price} onChange={(e) => this.handleChange(e)} name="price" />
         
         <RoundButton type="submit">
           Crear Party
@@ -88,3 +95,19 @@ export default class CreateParty extends Component {
     )
   }
 }
+
+
+
+
+
+// name: {type: String, required: true},
+// description: {type: String, required: true},
+// images: {type: Array, required: true},
+// date: {type: Date, required: true},
+// city: {type: String},
+// street: {type: String},
+// ageInterval: {type: String},
+// musicType: {type: String},
+// price: {type: Number},
+// attendants: [{type: Schema.Types.ObjectId,ref:'User'}],
+// smoking: {type: Boolean}
