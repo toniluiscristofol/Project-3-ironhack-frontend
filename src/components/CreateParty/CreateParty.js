@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import PartyService from '../../services/parties.service';
 import RoundButton from '../RoundButton/RoundButton';
 
-const validators = {
-  name: (value) => {
-    let message;
-    if(!value){
-      message = "Name is required";
-    }
-    return message;
-  }
-}
+// const validators = {
+//   name: (value) => {
+//     let message;
+//     if(!value){
+//       message = "Name is required";
+//     }
+//     return message;
+//   }
+// }
 export default class CreateParty extends Component {
   constructor(props){
     super(props);
@@ -33,7 +33,7 @@ export default class CreateParty extends Component {
   }
 
   handleSubmit(event){
-    event.preventDefault();
+    
     console.log(this.state.fields)
 
     // Usamos el servicio para llamar a la API y crear el Todo en la base de datos
@@ -68,10 +68,10 @@ export default class CreateParty extends Component {
         ...this.state.fields, 
         [name]: value
       },
-      errors:{
-        ...this.state.errors,
-        [name]: validators[name](value)
-      }
+      // errors:{
+      //   ...this.state.errors,
+      //   [name]: validators[name](value)
+      // }
     })
   }
 
@@ -79,20 +79,60 @@ export default class CreateParty extends Component {
     const { fields, errors } = this.state;
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
-        <input type="text" value={fields.name} onChange={(e) => this.handleChange(e)} name="name" />
-        <input type="text" value={fields.city} onChange={(e) => this.handleChange(e)} name="city" />
-        <input type="text" value={fields.street} onChange={(e) => this.handleChange(e)} name="street" />
-        <input type="text" value={fields.date} onChange={(e) => this.handleChange(e)} name="date" />
-        <input type="text" value={fields.musicType} onChange={(e) => this.handleChange(e)} name="musicType" />
-        <input type="text" value={fields.ageInterval} onChange={(e) => this.handleChange(e)} name="ageInterval" />
-        <input type="number" value={fields.age} onChange={(e) => this.handleChange(e)} name="age" />
-        <input type="number" value={fields.price} onChange={(e) => this.handleChange(e)} name="price" />
-        
-        <RoundButton type="submit">
-          Crear Party
-        </RoundButton>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          value={fields.name}
+          onChange={(e) => this.handleChange(e)}
+          name="name"
+        />
+        <label htmlFor="city">city:</label>
+        <input
+          type="text"
+          value={fields.city}
+          onChange={(e) => this.handleChange(e)}
+          name="city"
+        />
+        <label htmlFor="street">street:</label>
+        <input
+          type="text"
+          value={fields.street}
+          onChange={(e) => this.handleChange(e)}
+          name="street"
+        />
+        <label htmlFor="date">date:</label>
+        <input
+          type="text"
+          value={fields.date}
+          onChange={(e) => this.handleChange(e)}
+          name="date"
+        />
+        <label htmlFor="musicType">musicType:</label>
+        <input
+          type="text"
+          value={fields.musicType}
+          onChange={(e) => this.handleChange(e)}
+          name="musicType"
+        />
+
+        <label htmlFor="age">age:</label>
+        <input
+          type="number"
+          value={fields.age}
+          onChange={(e) => this.handleChange(e)}
+          name="age"
+        />
+        <label htmlFor="price">price:</label>
+        <input
+          type="number"
+          value={fields.price}
+          onChange={(e) => this.handleChange(e)}
+          name="price"
+        />
+
+          <button type = "submit">Create party</button>
       </form>
-    )
+    );
   }
 }
 
