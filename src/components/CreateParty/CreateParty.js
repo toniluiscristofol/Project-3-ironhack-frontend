@@ -1,7 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PartyService from '../../services/parties.service';
 import RoundButton from '../RoundButton/RoundButton';
 import "./CreateParty.css"
+import DateFnsUtils from "@date-io/date-fns";
+import "date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+
 // const validators = {
 //   name: (value) => {
 //     let message;
@@ -11,110 +18,108 @@ import "./CreateParty.css"
 //     return message;
 //   }
 // }
-export default function CreateParty  {
-  constructor(props){
-    super(props);
-    const [fields, setFields] = React.useState();
-    this.state = {
-      fields: {
-        name: "",
+export default function CreateParty()  {
+  
+    const [fields, setFields] = React.useState({
+      name: "",
         description: "",
         images: [],
-        date: {}
-        
-      }, 
-      errors: {
-        name: null
-      }
-    }
-    // Creamos una instancia del servicio de Todos
-    this.partyService = new PartyService();
-  }
-  
-  handleSubmit(event){
-    event.preventDefault();
-    console.log(this.state.fields)
-
-    // Usamos el servicio para llamar a la API y crear el Todo en la base de datos
-    this.partyService.create(this.state.fields)
-    .then(() => {
-      console.log('Created');
-      // Llamamos a la función que TodoList nos ha pasado como prop
-      this.setState({
-        fields: {
-          name: "",
-          city:"",
-          street:"",
-          date:"",
-          age: 0,
-          price: 0,
-          
-        }, 
-        errors: {
-          name: null
-        }
-      })
-    })
-    .catch(err => console.error(err))
-  }
-
-  handleChange(event){
-    const { name, value } = event.target;
-    this.setState({
-      fields: {
-        ...this.state.fields, 
-        [name]: value
+      date: new Date(Date.now()),
+      location: {
+        city: "",
+        street: ""
       },
+      price: 0
+      
+        
+    });
+    
+    // Creamos una instancia del servicio de Todos
+    const partyService = new PartyService();
+  
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(fields)
+
+   
+    partyService.create(fields)
+      .then(() => {
+        console.log('Created');
+      
+        setFields({
+          name: "",
+          description: "",
+          images: [],
+          date: new Date(Date.now()),
+          location: {
+            city: "",
+            street: "",
+          },
+          price: 0
+        });
+    
+      })
+      .catch(err => console.error(err));
+  }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFields({
+      
+        ...fields, 
+        [name]: value
+      
       // errors:{
-      //   ...this.state.errors,
+      //   ...errors,
       //   [name]: validators[name](value)
       // }
     })
   }
 
-  render() {
-    const { fields, errors } = this.state;
+  
     return (
-      <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="name">Name:</label>
         <input
           type="text"
           value={fields.name}
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => handleChange(e)}
           name="name"
         />
         <label htmlFor="city">city:</label>
         <input
           type="text"
           value={fields.city}
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => handleChange(e)}
           name="city"
         />
         <label htmlFor="street">street:</label>
         <input
           type="text"
           value={fields.street}
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => handleChange(e)}
           name="street"
         />
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
-        />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Date picker inline"
+            value={fields.date}
+            onChange={(e)=>handleChange(e)}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </MuiPickersUtilsProvider>
         <label htmlFor="musicType">musicType:</label>
         <input
           type="text"
           value={fields.musicType}
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => handleChange(e)}
           name="musicType"
         />
 
@@ -122,14 +127,14 @@ export default function CreateParty  {
         <input
           type="number"
           value={fields.age}
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => handleChange(e)}
           name="age"
         />
         <label htmlFor="price">price:</label>
         <input
           type="number"
           value={fields.price}
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => handleChange(e)}
           name="price"
         />
 
@@ -137,7 +142,7 @@ export default function CreateParty  {
       </form>
     );
   }
-}
+
 
 
 
