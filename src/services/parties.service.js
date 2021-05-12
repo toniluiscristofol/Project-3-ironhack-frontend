@@ -3,8 +3,8 @@ import axios from 'axios';
 export default class PartyService{
   constructor(){
     this.instance = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/todos`,
-      withCredentials: true
+      baseURL: `http://localhost:5000/api/parties`,
+       withCredentials: true
     })
   }
 
@@ -13,4 +13,5 @@ export default class PartyService{
   getOne = id => this.instance.get(`/${id}`);
   deleteOne = id => this.instance.delete(`/${id}`);
   updateOne = (id, data) => this.instance.put(`/${id}`, data);
+  edit = (data) => this.instance.put('/edit', data);
 }

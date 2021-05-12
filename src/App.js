@@ -14,8 +14,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <AnonRoute path = "/create-party" component={CreateParty}/>
-        <AnonRoute path="/todo-list" exact component={PartyList} />
-        <AnonRoute exact path="/signup" component={Signup} redirectPath="/todo-list" />
+        <AnonRoute path="/party-list" exact component={PartyList} />
+        <AnonRoute exact path="/signup" component={Signup} redirectPath="/party-list" />
         <AnonRoute exact path="/login" component={Login} />
       </Switch>
     </div>

@@ -22,7 +22,8 @@ export default class CreateParty extends Component {
         date:"",
         age: 0,
         price: 0,
-        ageInterval:""
+        ageInterval:"",
+        photo: null
       }, 
       errors: {
         name: null
@@ -49,7 +50,8 @@ export default class CreateParty extends Component {
           date:"",
           age: 0,
           price: 0,
-          ageInterval:""
+          ageInterval:"",
+          photo: null
         }, 
         errors: {
           name: null
@@ -62,16 +64,14 @@ export default class CreateParty extends Component {
   }
 
   handleChange(event){
-    const { name, value } = event.target;
+    const { name, value, type, files } = event.target;
     this.setState({
       fields: {
         ...this.state.fields, 
         [name]: value
+        // [name]: type === 'file' ? files[0] : value
       },
-      errors:{
-        ...this.state.errors,
-        [name]: validators[name](value)
-      }
+     
     })
   }
 
@@ -87,7 +87,8 @@ export default class CreateParty extends Component {
         <input type="text" value={fields.ageInterval} onChange={(e) => this.handleChange(e)} name="ageInterval" />
         <input type="number" value={fields.age} onChange={(e) => this.handleChange(e)} name="age" />
         <input type="number" value={fields.price} onChange={(e) => this.handleChange(e)} name="price" />
-        
+        <label htmlFor="photo">Photo: </label>
+        <input type="file" name="photo" onChange={(e) => this.handleChange(e)} />
         <RoundButton type="submit">
           Crear Party
         </RoundButton>

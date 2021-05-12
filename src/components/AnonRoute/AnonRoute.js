@@ -8,7 +8,7 @@ function AnonRoute(routeProps) {
   const { isLoggedIn, isLoading } = routeProps;
 
   // props provienen del componente AnonRoute
-  const { exact, path, redirectPath = "/todo-list" } = routeProps;
+  const { exact, path, redirectPath = "/party-list" } = routeProps;
   const ComponentToShow = routeProps.component;
 
   // AuthProvider todavía esta cargando la infirmación de la API para comprobar si hay usuario en sesión

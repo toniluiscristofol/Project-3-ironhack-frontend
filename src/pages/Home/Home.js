@@ -14,7 +14,7 @@ function Home() {
         </Text>
         <SearchBar></SearchBar>
         <div className="button-container">
-          <Link to="/todo-list">
+          <Link to="/party-list">
             <h1>Parties Near You</h1>
           </Link>
           <Link to="/create-party">
