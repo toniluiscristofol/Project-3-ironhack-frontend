@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PartyService from '../../services/parties.service';
 import RoundButton from '../RoundButton/RoundButton';
-
+import "./CreateParty.css"
 // const validators = {
 //   name: (value) => {
 //     let message;
@@ -11,18 +11,17 @@ import RoundButton from '../RoundButton/RoundButton';
 //     return message;
 //   }
 // }
-export default class CreateParty extends Component {
+export default function CreateParty  {
   constructor(props){
     super(props);
+    const [fields, setFields] = React.useState();
     this.state = {
       fields: {
         name: "",
-        city:"",
-        street:"",
-        date:"",
-        age: 0,
-        price: 0,
-        ageInterval:""
+        description: "",
+        images: [],
+        date: {}
+        
       }, 
       errors: {
         name: null
@@ -31,9 +30,9 @@ export default class CreateParty extends Component {
     // Creamos una instancia del servicio de Todos
     this.partyService = new PartyService();
   }
-
+  
   handleSubmit(event){
-    event.preventdefault();
+    event.preventDefault();
     console.log(this.state.fields)
 
     // Usamos el servicio para llamar a la API y crear el Todo en la base de datos
@@ -49,13 +48,11 @@ export default class CreateParty extends Component {
           date:"",
           age: 0,
           price: 0,
-          ageInterval:""
+          
         }, 
         errors: {
           name: null
         }
-      }, () => {
-        this.props.refreshState();
       })
     })
     .catch(err => console.error(err))
@@ -78,7 +75,7 @@ export default class CreateParty extends Component {
   render() {
     const { fields, errors } = this.state;
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
         <label htmlFor="name">Name:</label>
         <input
           type="text"
@@ -100,12 +97,18 @@ export default class CreateParty extends Component {
           onChange={(e) => this.handleChange(e)}
           name="street"
         />
-        <label htmlFor="date">date:</label>
-        <input
-          type="text"
-          value={fields.date}
-          onChange={(e) => this.handleChange(e)}
-          name="date"
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            "aria-label": "change date",
+          }}
         />
         <label htmlFor="musicType">musicType:</label>
         <input
@@ -130,7 +133,7 @@ export default class CreateParty extends Component {
           name="price"
         />
 
-          <button type = "submit">Create party</button>
+        <button type="submit">Create party</button>
       </form>
     );
   }

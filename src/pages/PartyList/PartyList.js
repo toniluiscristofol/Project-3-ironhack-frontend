@@ -4,8 +4,9 @@ import Text from '../../components/Text';
 import Todo from '../../components/Todo/Todo';
 import { withAuth } from '../../context/auth.context';
 import PartyService from '../../services/parties.service'
-import SCTodoList from './TodoList.styled';
-
+import "./PartyList.css"
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 class PartyList extends Component {
   constructor(props) {
@@ -48,9 +49,21 @@ class PartyList extends Component {
   render() {
     const { parties } = this.state;
     return (
-      <div>
-        <PartyCard className="party-card" name="Appartment in Barcelona" description="Great nightlife"/>
-        <PartyCard name="IronMansion" description= "Wearing mask is not required" />
+      <div className="party-card">
+        <Link to="/create-party">
+          <Button type="submit" variant="contained" color="secondary">
+            Create a party
+          </Button>
+        </Link>
+        <PartyCard
+          name="Appartment in Barcelona"
+          description="Great nightlife"
+        />
+        <hr />
+        <PartyCard
+          name="IronMansion"
+          description="Wearing mask is not required"
+        />
       </div>
     );
   }

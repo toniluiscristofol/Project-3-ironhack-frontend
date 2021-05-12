@@ -39,7 +39,7 @@ export default class SearchBar extends Component {
               name="input"
               value={this.state.input}
             />
-            <Link to="/signup">
+            <Link to="/parties">
               <Button type ="submit" variant="contained" color="secondary">
                 Search
               </Button>
