@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import "./SearchBar.css"
 export default class SearchBar extends Component {
 
     state = {
@@ -30,10 +32,19 @@ export default class SearchBar extends Component {
     //   }
     render() {
         return (
-            <div>
-             <input onChange={(e)=> this.filterParties(e)}  placeholder="Name.." type="text" name="input" value={this.state.input} />
-    
-            </div>
-        )
+          <div className = "search-container">
+            <input
+              onChange={(e) => this.filterParties(e)}
+              type="text"
+              name="input"
+              value={this.state.input}
+            />
+            <Link to="/signup">
+              <Button type ="submit" variant="contained" color="secondary">
+                Search
+              </Button>
+            </Link>
+          </div>
+        );
     }
 }

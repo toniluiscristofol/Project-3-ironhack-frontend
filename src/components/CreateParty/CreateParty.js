@@ -33,7 +33,7 @@ export default class CreateParty extends Component {
   }
 
   handleSubmit(event){
-    
+    event.preventdefault();
     console.log(this.state.fields)
 
     // Usamos el servicio para llamar a la API y crear el Todo en la base de datos

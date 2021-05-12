@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import RoundButton from '../../components/RoundButton/RoundButton'
 import Text from '../../components/Text'
-import  "./Home.css"
+import "./Home.css"
 import SearchBar from '../../components/SearchBar/SearchBar'
 import Button from "@material-ui/core/Button";
 function Home() {
@@ -17,9 +17,7 @@ function Home() {
       </div>
       <SearchBar />
       <div className="home-wrapper">
-        <Text as="h1" uppercase size="l" color="black" weight="gelionMedium">
-          Organize and find parties. Make friends. Have a great time together.
-        </Text>
+        <h1>Discover your next wild night.</h1>
 
         <div className="button-container">
           <Link to="/create-party">

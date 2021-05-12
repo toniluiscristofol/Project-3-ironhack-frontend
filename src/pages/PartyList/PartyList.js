@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import PartyCard from '../../components/Party/PartyCard';
 import Text from '../../components/Text';
 import Todo from '../../components/Todo/Todo';
 import { withAuth } from '../../context/auth.context';
 import PartyService from '../../services/parties.service'
 import SCTodoList from './TodoList.styled';
+
 
 class PartyList extends Component {
   constructor(props) {
@@ -46,19 +48,11 @@ class PartyList extends Component {
   render() {
     const { parties } = this.state;
     return (
-      <SCTodoList>
-        <Text className="close-session" onClick={() => this.handleLogout()} as="p" color="black">Cerrar sesión</Text>
-        <div className="card">
-          <Text size="l" weight="superDisplay" color="black">
-            {parties.length === 0 ? "Ups, no tienes ningún todo" : parties.length === 1 ? "Estás más cerca de no dejarte nada, todo" : "Perfecto, sigue añadiento todos"}
-          </Text>
-          {
-            this.displayTodos()
-          }
-          
-        </div>
-      </SCTodoList>
-    )
+      <div>
+        <PartyCard className="party-card" name="Appartment in Barcelona" description="Great nightlife"/>
+        <PartyCard name="IronMansion" description= "Wearing mask is not required" />
+      </div>
+    );
   }
 }
 

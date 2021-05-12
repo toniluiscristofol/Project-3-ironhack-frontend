@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import PartyList from './pages/PartyList/PartyList';
 import CreateParty from './components/CreateParty/CreateParty';
+import "@fontsource/roboto";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <AnonRoute path = "/create-party" component={CreateParty}/>
-        <AnonRoute path="/todo-list" exact component={PartyList} />
+        <AnonRoute path="/parties" exact component={PartyList} />
         <AnonRoute exact path="/signup" component={Signup} redirectPath="/todo-list" />
         <AnonRoute exact path="/login" component={Login} />
       </Switch>

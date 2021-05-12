@@ -1,0 +1,11 @@
+body {
+    font-family: 'Roboto',
+        sans-serif;
+}
+
+.card{
+    margin-bottom: 100px;
+}
+.image{
+    border-radius:5px;
+}
