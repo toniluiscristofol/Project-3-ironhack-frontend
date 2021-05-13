@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RoundButton from '../../components/RoundButton/RoundButton'
+
 import Text from '../../components/Text'
 import "./Home.css"
 import SearchBar from '../../components/SearchBar/SearchBar'

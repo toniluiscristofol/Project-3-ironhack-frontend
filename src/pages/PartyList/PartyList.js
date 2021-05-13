@@ -50,6 +50,9 @@ class PartyList extends Component {
     const { parties } = this.state;
     return (
       <div className="party-card">
+        <Button onClick={()=> this.handleLogout()} variant="contained" color="secondary">
+          Log out
+        </Button>
         <Link to="/create-party">
           <Button type="submit" variant="contained" color="secondary">
             Create a party

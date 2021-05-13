@@ -1,6 +1,6 @@
 import React from 'react'
 import PartyService from '../../services/parties.service';
-import RoundButton from '../RoundButton/RoundButton';
+
 import "./CreateParty.css"
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
@@ -42,8 +42,13 @@ export default function CreateParty()  {
     event.preventDefault();
     console.log(fields)
 
+    const uploadData = new FormData();
+    //uploadData.append('nombre de la clave', 'valor');
+    Object.keys(fields).forEach((key) => {
+      uploadData.append(key, fields[key]);
+    });
    
-    partyService.create(fields)
+    partyService.create(uploadData)
       .then(() => {
         console.log('Created');
       
@@ -63,11 +68,11 @@ export default function CreateParty()  {
       .catch(err => console.error(err));
   }
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, type, files } = event.target;
     setFields({
       
         ...fields, 
-        [name]: value
+        [name]: type === "file" ? files : value
       
       // errors:{
       //   ...errors,
@@ -89,14 +94,14 @@ export default function CreateParty()  {
         <label htmlFor="city">city:</label>
         <input
           type="text"
-          value={fields.city}
+          value={fields.location.city}
           onChange={(e) => handleChange(e)}
           name="city"
         />
         <label htmlFor="street">street:</label>
         <input
           type="text"
-          value={fields.street}
+          value={fields.location.street}
           onChange={(e) => handleChange(e)}
           name="street"
         />
@@ -109,33 +114,25 @@ export default function CreateParty()  {
             id="date-picker-inline"
             label="Date picker inline"
             value={fields.date}
-            onChange={(e)=>handleChange(e)}
+            onChange={(e) => handleChange(e)}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
           />
         </MuiPickersUtilsProvider>
-        <label htmlFor="musicType">musicType:</label>
-        <input
-          type="text"
-          value={fields.musicType}
-          onChange={(e) => handleChange(e)}
-          name="musicType"
-        />
 
-        <label htmlFor="age">age:</label>
-        <input
-          type="number"
-          value={fields.age}
-          onChange={(e) => handleChange(e)}
-          name="age"
-        />
         <label htmlFor="price">price:</label>
         <input
           type="number"
           value={fields.price}
           onChange={(e) => handleChange(e)}
           name="price"
+        />
+        <label htmlFor="images">Upload images </label>
+        <input
+          type="file"
+          name="images"
+          onChange={(e) =>handleChange(e)}
         />
 
         <button type="submit">Create party</button>

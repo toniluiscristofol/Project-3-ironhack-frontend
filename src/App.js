@@ -14,10 +14,19 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path = "/create-party" component={CreateParty}/>
+        <PrivateRoute
+          path="/create-party"
+          component={CreateParty}
+          redirectPath="/signup"
+        />
         <Route path="/parties" exact component={PartyList} />
-        <Route exact path="/signup" component={Signup} redirectPath="/parties" />
-        <Route exact path="/login" component={Login} />
+        <AnonRoute
+          exact
+          path="/signup"
+          component={Signup}
+          redirectPath="/parties"
+        />
+        <AnonRoute exact path="/login" component={Login} />
       </Switch>
     </div>
   );
