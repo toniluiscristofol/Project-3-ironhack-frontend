@@ -31,13 +31,18 @@ class PartyList extends Component {
     this.refreshState();
   }
 
-  displayTodos(){
+  displayParties(){
     const { parties } = this.state;
+    console.log(parties)
     return parties.map(party => {
+      console.log(party)
       // <Todo key={todo.id} todo={todo}/>
       // <Todo key={todo.id} name={todo.name} description={todo.description} done={todo.done} .../>
       return (
-        <Todo refreshState={() => this.refreshState()} key={party.id} {...party}/>
+        <div>
+          <Link key={party.id} to={`/party-details/${party.id}`}><PartyCard name={parties.name} description={parties.description} refreshState={() => this.refreshState()} {...party}/></Link> 
+        
+        </div>
       )
     })
   }
@@ -47,23 +52,10 @@ class PartyList extends Component {
   }
 
   render() {
-    const { parties } = this.state;
+ 
     return (
       <div className="party-card">
-        <Link to="/create-party">
-          <Button type="submit" variant="contained" color="secondary">
-            Create a party
-          </Button>
-        </Link>
-        <PartyCard
-          name="Appartment in Barcelona"
-          description="Great nightlife"
-        />
-        <hr />
-        <PartyCard
-          name="IronMansion"
-          description="Wearing mask is not required"
-        />
+        {this.displayParties()}
       </div>
     );
   }

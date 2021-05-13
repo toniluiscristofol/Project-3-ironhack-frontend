@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import PartyList from './pages/PartyList/PartyList';
+import PartyDetails from './pages/PartyDetails/PartyDetails';
 import CreateParty from './components/CreateParty/CreateParty';
 import "@fontsource/roboto";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/parties" exact component={PartyList} />
         <Route exact path="/signup" component={Signup} redirectPath="/parties" />
         <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/party-details/:id" component={PartyDetails} />
       </Switch>
     </div>
   );
