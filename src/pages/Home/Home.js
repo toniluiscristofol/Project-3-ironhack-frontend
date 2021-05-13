@@ -14,6 +14,11 @@ function Home() {
             Sign Up
           </Button>
         </Link>
+        <Link to="/login">
+          <Button variant="contained" color="secondary">
+            Log In
+          </Button>
+        </Link>
       </div>
       <SearchBar />
       <div className="home-wrapper">

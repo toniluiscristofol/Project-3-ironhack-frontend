@@ -19,17 +19,16 @@ const useStyles = makeStyles({
 });
 
 
-export default function Party({name, description, image}) {
+export default function Party({ name, description, city }) {
+  console.log(city)
   const classes = useStyles();
     return (
       <Card className="card" className={classes.root}>
         <CardActionArea>
           <Box display="flex" p={1}>
-            
             <CardMedia
               className="image"
               component="img"
-              
               alt="Contemplative Reptile"
               height="140"
               image="/house1.jpg"
@@ -40,7 +39,10 @@ export default function Party({name, description, image}) {
                 {name}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-               {description}
+                {description}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {city}
               </Typography>
             </CardContent>
           </Box>

@@ -7,66 +7,106 @@ import PartyService from '../../services/parties.service'
 import "./PartyList.css"
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import Input from "@material-ui/core/Input";
 
 class PartyList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      parties: []
-    }
+      parties: [],
+      city: ""
+    };
     this.partyService = new PartyService();
     // this.refreshState = this.refreshState.bind(this);
   }
+  filterParties(event) {
+    const arrayCopy = [...this.state.parties];
+    const { city, value } = event.target;
 
+    this.setState({
+      name: value,
+    });
+
+    if (value) {
+      console.log(value);
+      const result = arrayCopy.filter((party) => party.city.toLowerCase().includes(value.toLowerCase()));
+      this.setState({
+        parties: result,
+      });
+    } else if (value.length === 0) {
+      this.refreshState();
+    }
+  }
   refreshState() {
-    this.partyService.get()
-      .then(response => {
+    this.partyService
+      .get()
+      .then((response) => {
         console.log(response.data);
         this.setState({ parties: response.data });
       })
-      .catch(err => console.error(err))
+      .catch((err) => console.error(err));
   }
 
   componentDidMount() {
     this.refreshState();
   }
 
-  displayTodos(){
+  displayParties() {
     const { parties } = this.state;
-    return parties.map(party => {
-      // <Todo key={todo.id} todo={todo}/>
-      // <Todo key={todo.id} name={todo.name} description={todo.description} done={todo.done} .../>
+    console.log(parties);
+    return parties.map((party) => {
+      
       return (
-        <Todo refreshState={() => this.refreshState()} key={party.id} {...party}/>
-      )
-    })
+        <div>
+          <Link
+            style={{ textDecoration: "none" }}
+            key={party.id}
+            to={`/party-details/${party.id}`}
+          >
+            <PartyCard
+              refreshState={() => this.refreshState()}
+              {...party}
+              city={party.city}
+            />
+          </Link>
+        </div>
+      );
+    });
   }
 
   handleLogout = () => {
     this.props.logout();
-  }
+  };
 
   render() {
-    const { parties } = this.state;
     return (
       <div className="party-card">
-        <Button onClick={()=> this.handleLogout()} variant="contained" color="secondary">
-          Log out
-        </Button>
-        <Link to="/create-party">
-          <Button type="submit" variant="contained" color="secondary">
-            Create a party
+        <Link style={{ textDecoration: "none" }} to="/create-party">
+          <Button variant="contained" color="secondary">
+            Create party
           </Button>
         </Link>
-        <PartyCard
-          name="Appartment in Barcelona"
-          description="Great nightlife"
+
+        <Input
+          onChange={(e) => this.filterParties(e)}
+          type="text"
+          name="city"
+          value={this.state.name}
+          placeholder="City"
         />
-        <hr />
-        <PartyCard
-          name="IronMansion"
-          description="Wearing mask is not required"
-        />
+        {/* <TextField
+          onChange={(e) => this.filterParties(e)}
+          type="text"
+          name="city"
+          value={this.state.name}
+          id="outlined-basic"
+          label="Outlined"
+          variant="outlined"
+        /> */}
+
+        {this.displayParties()}
       </div>
     );
   }

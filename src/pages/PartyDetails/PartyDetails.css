@@ -1,0 +1,25 @@
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 386px;
+    width: 800px;
+    
+}
+
+.title{
+    display: inline-block;
+    margin: 20px;
+}
+
+
+
+.images{
+    margin: 5px;
+    border-radius: 8px;
+}
+
+h3{
+    display: inline-block;
+}

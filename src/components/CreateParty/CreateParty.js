@@ -8,6 +8,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import { Redirect } from 'react-router';
 
 // const validators = {
 //   name: (value) => {
@@ -25,10 +26,10 @@ export default function CreateParty()  {
         description: "",
         images: [],
       date: new Date(Date.now()),
-      location: {
+     
         city: "",
-        street: ""
-      },
+        street: "",
+      
       price: 0
       
         
@@ -41,7 +42,7 @@ export default function CreateParty()  {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(fields)
-
+    
     const uploadData = new FormData();
     //uploadData.append('nombre de la clave', 'valor');
     Object.keys(fields).forEach((key) => {
@@ -50,6 +51,7 @@ export default function CreateParty()  {
    
     partyService.create(uploadData)
       .then(() => {
+        
         console.log('Created');
       
         setFields({
@@ -57,21 +59,30 @@ export default function CreateParty()  {
           description: "",
           images: [],
           date: new Date(Date.now()),
-          location: {
+        
             city: "",
             street: "",
-          },
+          
           price: 0
         });
-    
+        
       })
       .catch(err => console.error(err));
+    
+  }
+  const handleDateChange = (date) => {
+    setFields({
+      ...fields,
+      date: date
+    })
   }
   const handleChange = (event) => {
     const { name, value, type, files } = event.target;
+    console.log(name)
     setFields({
       
-        ...fields, 
+      ...fields,
+        
         [name]: type === "file" ? files : value
       
       // errors:{
@@ -91,17 +102,24 @@ export default function CreateParty()  {
           onChange={(e) => handleChange(e)}
           name="name"
         />
+        <label htmlFor="name">Description:</label>
+        <input
+          type="text"
+          value={fields.description}
+          onChange={(e) => handleChange(e)}
+          name="description"
+        />
         <label htmlFor="city">city:</label>
         <input
           type="text"
-          value={fields.location.city}
+          value={fields.city}
           onChange={(e) => handleChange(e)}
           name="city"
         />
         <label htmlFor="street">street:</label>
         <input
           type="text"
-          value={fields.location.street}
+          value={fields.street}
           onChange={(e) => handleChange(e)}
           name="street"
         />
@@ -109,12 +127,12 @@ export default function CreateParty()  {
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
-            format="MM/dd/yyyy"
+            format="dd/MM/yyyy"
             margin="normal"
             id="date-picker-inline"
             label="Date picker inline"
             value={fields.date}
-            onChange={(e) => handleChange(e)}
+            onChange={handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -129,11 +147,7 @@ export default function CreateParty()  {
           name="price"
         />
         <label htmlFor="images">Upload images </label>
-        <input
-          type="file"
-          name="images"
-          onChange={(e) =>handleChange(e)}
-        />
+        <input type="file" name="images" onChange={(e) => handleChange(e)} />
 
         <button type="submit">Create party</button>
       </form>
