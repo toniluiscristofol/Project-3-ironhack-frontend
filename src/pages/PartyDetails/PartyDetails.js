@@ -11,26 +11,30 @@ export default class PartyDetails extends React.Component {
         super(props);
         this.state = {
           party: {
-              name: ""
+              name: "hh"
           }
         }
         this.partyService = new PartyService();
+        
+        console.log(this.state)
         
       }
 
 
     refreshState(id) {
+        console.log(id)
         this.partyService.getOne(id)
           .then(response => {
-            console.log(response.data);
-            this.setState({ party: response.data });
+              console.log(response.data)
+            
+            //this.setState({ party: response.data });
           })
           .catch(err => console.error(err))
       }
 
     componentDidMount() {
         this.refreshState(this.props.match.params.id);
-        console.log(this.props.match.params.id);
+        
       }
     
    
@@ -38,7 +42,7 @@ export default class PartyDetails extends React.Component {
             return(
             <div>
              
-                {/* <h1>{this.state.party.name}</h1> */}
+                 <h1>{this.state.party.name}</h1> 
                 HOLA
                 
                

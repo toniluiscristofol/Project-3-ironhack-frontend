@@ -39,10 +39,10 @@ class PartyList extends Component {
       // <Todo key={todo.id} todo={todo}/>
       // <Todo key={todo.id} name={todo.name} description={todo.description} done={todo.done} .../>
       return (
-        <div>
-          <Link key={party.id} to={`/party-details/${party.id}`}><PartyCard name={parties.name} description={parties.description} refreshState={() => this.refreshState()} {...party}/></Link> 
+       
+          <Link key={party.id} to={`/party-details/${party.id}`}><PartyCard refreshState={() => this.refreshState()} {...party}/></Link> 
         
-        </div>
+    
       )
     })
   }
