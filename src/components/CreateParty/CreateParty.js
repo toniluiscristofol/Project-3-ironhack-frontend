@@ -41,7 +41,12 @@ export default function CreateParty()  {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(fields)
-
+    const uploadData = new FormData();
+    //uploadData.append('nombre de la clave', 'valor');
+    Object.keys(fields).forEach(key => {
+      uploadData.append(key, fields[key]);
+    })
+    
    
     partyService.create(fields)
       .then(() => {
@@ -50,7 +55,7 @@ export default function CreateParty()  {
         setFields({
           name: "",
           description: "",
-          images: [],
+          images: "",
           date: new Date(Date.now()),
           location: {
             city: "",
@@ -63,11 +68,13 @@ export default function CreateParty()  {
       .catch(err => console.error(err));
   }
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, type, files } = event.target;
+    console.log(files)
     setFields({
       
         ...fields, 
-        [name]: value
+        [name]: value,
+        [name]: type === 'file' ? files[0] : value
       
       // errors:{
       //   ...errors,
@@ -137,6 +144,10 @@ export default function CreateParty()  {
           onChange={(e) => handleChange(e)}
           name="price"
         />
+         
+        <label htmlFor="images">Photo: </label>
+        <input type="file" name="images" onChange={(e) => handleChange(e)} />
+       
 
         <button type="submit">Create party</button>
       </form>

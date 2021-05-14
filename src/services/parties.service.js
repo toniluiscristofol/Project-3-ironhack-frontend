@@ -13,4 +13,5 @@ export default class PartyService{
   getOne = id => this.instance.get(`/${id}`);
   deleteOne = id => this.instance.delete(`/${id}`);
   updateOne = (id, data) => this.instance.put(`/${id}`, data);
+  getUserParties = () => this.instance.get("/")
 }

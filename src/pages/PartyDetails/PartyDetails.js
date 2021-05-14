@@ -27,7 +27,7 @@ export default class PartyDetails extends React.Component {
           .then(response => {
               console.log(response.data)
             
-            //this.setState({ party: response.data });
+            this.setState({ party: response.data });
           })
           .catch(err => console.error(err))
       }
