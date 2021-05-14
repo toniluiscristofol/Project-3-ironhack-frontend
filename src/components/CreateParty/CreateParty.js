@@ -30,7 +30,8 @@ export default function CreateParty()  {
         city: "",
         street: "",
       
-      price: 0
+      price: 0,
+      maxAttendees: 0
       
         
     });
@@ -63,7 +64,8 @@ export default function CreateParty()  {
             city: "",
             street: "",
           
-          price: 0
+          price: 0,
+          maxAttendees: 0
         });
         
       })
@@ -71,6 +73,7 @@ export default function CreateParty()  {
     
   }
   const handleDateChange = (date) => {
+    
     setFields({
       ...fields,
       date: date
@@ -145,6 +148,13 @@ export default function CreateParty()  {
           value={fields.price}
           onChange={(e) => handleChange(e)}
           name="price"
+        />
+        <label htmlFor="maxAtendees">Maximum number of atendees:</label>
+        <input
+          type="number"
+          value={fields.maxAttendees}
+          onChange={(e) => handleChange(e)}
+          name="maxAttendees"
         />
         <label htmlFor="images">Upload images </label>
         <input type="file" name="images" onChange={(e) => handleChange(e)} />

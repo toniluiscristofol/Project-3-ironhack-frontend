@@ -6,38 +6,66 @@ import "photoswipe/dist/default-skin/default-skin.css";
 import EventIcon from "@material-ui/icons/Event";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "./PartyDetails.css"
+import Button from "@material-ui/core/Button";
+
 export default class PartyDetails extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      party: {
-        name: "",
-      },
-    };
-    this.partyService = new PartyService();
-  }
 
-  refreshState(id) {
-    this.partyService
-      .getOne(id)
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ party: response.data });
-      })
-      .catch((err) => console.error(err));
-  }
 
-  componentDidMount() {
-    this.refreshState(this.props.match.params.id);
-    console.log(this.props.match.params.id);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+          party: {
+            name: "",
+            description: "",
+            images: [],
+            price: 0,
+            date: "",
+            host: "",
+            maxAttendees: "",
+            attendees: [],
+            street: "",
+            city: ""
+          }
+        }
+        this.partyService = new PartyService();
+        
+        console.log(this.state)
+        
+      }
+
+
+
+    refreshState(id) {
+        console.log(id)
+        this.partyService.getOne(id)
+          .then(response => {
+              console.log(response.data.maxAttendees)
+            
+            this.setState({ party: response.data });
+          })
+          .catch(err => console.error(err))
+      }
+      
+    componentDidMount() {
+        this.refreshState(this.props.match.params.id);
+        
+      }
+    
+   
+      
   
   
 
   render() {
+    const { name, description, images, price, host, attendees, maxAttendees, street, date, city } = this.state.party;
     return (
       <div className="party-details">
-        <h1 className="title">Central luxury penthouse with huge private terrace</h1> <h3>21th May</h3>
+        <h1 className="title">{name}</h1>{" "}
+        <span className="calendar">{date }</span>
+        <span>
+          {attendees.length}/{maxAttendees}
+        </span>
+        <p className="city">{city}</p>
         <div className="gallery">
           <img
             border-radius="5px"
@@ -76,7 +104,13 @@ export default class PartyDetails extends React.Component {
             alt=""
           />
         </div>
-        <span>Host: Miguel</span>
+        <p className="host">Host: {host}</p>
+        <span>
+          {" "}
+          <Button variant="contained" color="secondary">
+            Create party
+          </Button>
+        </span>
       </div>
     );
   }

@@ -36,9 +36,17 @@ class AuthProvider extends React.Component{
     .catch(() => this.setState({ isLoggedIn: false, user: null }))
   }
 
+  
+
   logout = () => {
     this.authService.logout()
     .then(() => this.setState({ isLoggedIn: false, user: null }))
+    .catch(error => console.error(error))
+  }
+
+  edit = (data) => {
+    this.authService.edit(data)
+    .then(response => this.setState({ ...this.state, user: response.data }))
     .catch(error => console.error(error))
   }
 
@@ -48,7 +56,7 @@ class AuthProvider extends React.Component{
     if(isLoading) return <p>Loading...</p>;
 
     return (
-      <Provider value={{ isLoading, isLoggedIn, user, signup: this.signup, login: this.login, logout: this.logout }}>
+      <Provider value={{ isLoading, isLoggedIn, user, signup: this.signup, login: this.login, logout: this.logout, edit: this.edit }}>
         {this.props.children}
       </Provider>
     )
@@ -64,7 +72,7 @@ const withAuth = (WrappedComponent) => {
       <Consumer>
         {
           (value) => {
-            const { isLoading, isLoggedIn, user, signup, login, logout } = value;
+            const { isLoading, isLoggedIn, user, signup, login, logout, edit } = value;
 
             // Pasamos las props propias del contexto y además las props que ya recibiera el componente previamente via {...props}
             return (
@@ -75,6 +83,7 @@ const withAuth = (WrappedComponent) => {
                 signup={signup}
                 login={login}
                 logout={logout}
+                edit={edit}
                 {...props}
 
               />

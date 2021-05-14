@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Input from "@material-ui/core/Input";
+import Navbar from "../../components/NavBar/NavBar"
 
 class PartyList extends Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class PartyList extends Component {
   render() {
     return (
       <div className="party-card">
+        <Navbar />
         <Link style={{ textDecoration: "none" }} to="/create-party">
           <Button variant="contained" color="secondary">
             Create party
