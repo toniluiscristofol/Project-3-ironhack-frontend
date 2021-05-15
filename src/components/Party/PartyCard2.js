@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({title, image}) {
+export default function RecipeReviewCard({title, image, description}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -71,8 +71,7 @@ export default function RecipeReviewCard({title, image}) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

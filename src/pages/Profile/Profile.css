@@ -1,15 +1,23 @@
 .cards-party{
-    display: flex;
-    flex-direction: row;
+  
     margin-bottom: 1cm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
 }
 
 
 #cards-party2{
-    display: flex;
-    flex-direction: row;
+   
     margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    margin-left: 80px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* body{
