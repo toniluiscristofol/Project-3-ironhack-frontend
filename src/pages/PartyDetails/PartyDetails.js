@@ -36,10 +36,10 @@ export default class PartyDetails extends React.Component {
 
 
     refreshState(id) {
-        console.log(id)
+       
         this.partyService.getOne(id)
           .then(response => {
-              console.log(response.data.maxAttendees)
+              
             
             this.setState({ party: response.data });
           })
@@ -58,13 +58,14 @@ export default class PartyDetails extends React.Component {
 
   render() {
     const { name, description, images, price, host, attendees, maxAttendees, street, date, city } = this.state.party;
+    console.log(typeof date)
     return (
       <div className="party-details">
         <h1 className="title">{name}</h1>{" "}
-        <span className="calendar">{date }</span>
-        <span>
+        <span className="calendar">{date.substring(0, 15)}</span>
+        {/* <span>
           {attendees.length}/{maxAttendees}
-        </span>
+        </span> */}
         <p className="city">{city}</p>
         <div className="gallery">
           <img
@@ -104,7 +105,7 @@ export default class PartyDetails extends React.Component {
             alt=""
           />
         </div>
-        <p className="host">Host: {host}</p>
+        <p className="host">Host: {host.username}</p>
         <span>
           {" "}
           <Button variant="contained" color="secondary">
