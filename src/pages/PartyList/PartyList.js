@@ -84,20 +84,17 @@ class PartyList extends Component {
   render() {
     return (
       <div className="party-card">
-        <Navbar />
-        <Link style={{ textDecoration: "none" }} to="/create-party">
-          <Button variant="contained" color="secondary">
-            Create party
-          </Button>
-        </Link>
+        <div className="navbar">
+          <Navbar className="nav" />
+        </div>
 
-        <Input
+        {/* <Input
           onChange={(e) => this.filterParties(e)}
           type="text"
           name="city"
           value={this.state.name}
           placeholder="City"
-        />
+        /> */}
         {/* <TextField
           onChange={(e) => this.filterParties(e)}
           type="text"
@@ -107,8 +104,7 @@ class PartyList extends Component {
           label="Outlined"
           variant="outlined"
         /> */}
-
-        {this.displayParties()}
+        <div className="parties">{this.displayParties()}</div>
       </div>
     );
   }

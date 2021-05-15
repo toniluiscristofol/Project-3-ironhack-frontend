@@ -14,7 +14,15 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-
+import "./NavBar.css"
+import DateFnsUtils from "@date-io/date-fns";
+import "date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
+    // backgroundColor: fade("#000", 0.8),
+    // "&:hover": {
+    //   backgroundColor: fade("#E3E3E3", 0.9),
+    // },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
@@ -53,12 +61,16 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: "7px",
   },
   inputRoot: {
     color: "inherit",
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
+    
+    padding: theme.spacing(2, 1, 1, 0),
+    
+    
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
@@ -133,23 +145,7 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <Link style={{ textDecoration: "none" }} to="/create-party">
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -159,63 +155,128 @@ export default function NavBar() {
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
-      </MenuItem>
+      </Link>
     </Menu>
   );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "white" }}>
         <Toolbar>
-          
-          
-          <img width= "200px" height ="38px" src="/PILLOWTALK__1_-removebg-preview (3).png" alt="" />
+          <Link style={{ textDecoration: "none" }} to="/">
+            <img
+              width="200px"
+              height="38px"
+              src="/PILLOWTALK (3) (2).png"
+              alt=""
+            />
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon
+                style={{
+                  marginLeft: "300px",
+                  background: "#f50057",
+                  borderRadius: "50%",
+                  padding: "4px",
+                }}
+              />
             </div>
             <InputBase
-              placeholder="Search…"
+              style={{
+                marginLeft: "300px",
+                borderRadius: "30px 0px 0px 30px",
+                width: "15vw",
+                border: "2px solid #c7c7c7",
+                color: "black",
+                marginTop: "15px",
+                marginRight: "0px",
+                marginBottom: "10px",
+                padding: "7px 5px",
+                borderRight: "none",
+              }}
+              placeholder="Search by city"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              className="input"
             />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                style={{
+                  marginLeft: "0px",
+                  border: "2px solid #c7c7c7",
+                  borderRadius: "0px 30px 30px 0px",
+                  paddingBottom: "8px",
+                }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
+                disableToolbar
+                variant="inline"
+                format="dd/MM/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                label="Search by date"
+                // value={fields.date}
+                // onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <Link style={{ textDecoration: "none" }} to="/create-party">
+              <Button
+                style={{
+                  borderRadius: "30px",
+                  padding: "10px 30px",
+                  position: "absolute",
+                  top: "25px",
+                  right: "150px",
+                  fontSize: "12px",
+                }}
+                variant="contained"
+                color="secondary"
+                className="post-btn"
+              >
+                Post a party
+              </Button>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/profile">
+              <IconButton
+                style={{
+                  background: "#E6E6E6",
+                  marginTop: "10px",
+
+                  marginRight: "10px",
+                  padding: "10px",
+                }}
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="red"
+              >
+                <AccountCircle />
+              </IconButton>
+            </Link>
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+            <Link style={{ textDecoration: "none" }} to="/create-party">
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
