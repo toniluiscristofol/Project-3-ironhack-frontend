@@ -17,8 +17,19 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path = "/create-party" component={CreateParty}/>
+        <PrivateRoute
+          path="/create-party"
+          component={CreateParty}
+          redirectPath="/parties"
+        />
         <Route path="/parties" exact component={PartyList} />
+        <AnonRoute
+          exact
+          path="/signup"
+          component={Signup}
+          redirectPath="/parties"
+        />
+        <AnonRoute exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} redirectPath="/parties" />
         <Route exact path="/login" component={Login} />
         <PrivateRoute  path="/party-details/:id" component={PartyDetails} />

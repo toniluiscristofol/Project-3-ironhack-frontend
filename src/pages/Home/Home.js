@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RoundButton from '../../components/RoundButton/RoundButton'
+
 import Text from '../../components/Text'
 import "./Home.css"
 import SearchBar from '../../components/SearchBar/SearchBar'
@@ -12,6 +12,11 @@ function Home() {
         <Link to="/signup">
           <Button variant="contained" color="secondary">
             Sign Up
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button variant="contained" color="secondary">
+            Log In
           </Button>
         </Link>
       </div>

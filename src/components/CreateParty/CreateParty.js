@@ -1,6 +1,6 @@
 import React from 'react'
 import PartyService from '../../services/parties.service';
-import RoundButton from '../RoundButton/RoundButton';
+
 import "./CreateParty.css"
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
@@ -8,6 +8,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import { Redirect } from 'react-router';
 
 // const validators = {
 //   name: (value) => {
@@ -25,11 +26,12 @@ export default function CreateParty()  {
         description: "",
         images: [],
       date: new Date(Date.now()),
-      location: {
+     
         city: "",
-        street: ""
-      },
-      price: 0
+        street: "",
+      
+      price: 0,
+      maxAttendees: 0
       
         
     });
@@ -41,15 +43,16 @@ export default function CreateParty()  {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(fields)
+    
     const uploadData = new FormData();
     //uploadData.append('nombre de la clave', 'valor');
-    Object.keys(fields).forEach(key => {
+    Object.keys(fields).forEach((key) => {
       uploadData.append(key, fields[key]);
-    })
-    
+    });
    
-    partyService.create(fields)
+    partyService.create(uploadData)
       .then(() => {
+        
         console.log('Created');
       
         setFields({
@@ -57,24 +60,33 @@ export default function CreateParty()  {
           description: "",
           images: "",
           date: new Date(Date.now()),
-          location: {
+        
             city: "",
             street: "",
-          },
-          price: 0
+          
+          price: 0,
+          maxAttendees: 0
         });
-    
+        
       })
       .catch(err => console.error(err));
+    
+  }
+  const handleDateChange = (date) => {
+    
+    setFields({
+      ...fields,
+      date: date
+    })
   }
   const handleChange = (event) => {
     const { name, value, type, files } = event.target;
-    console.log(files)
+    console.log(name)
     setFields({
       
-        ...fields, 
-        [name]: value,
-        [name]: type === 'file' ? files[0] : value
+      ...fields,
+        
+        [name]: type === "file" ? files : value
       
       // errors:{
       //   ...errors,
@@ -92,6 +104,13 @@ export default function CreateParty()  {
           value={fields.name}
           onChange={(e) => handleChange(e)}
           name="name"
+        />
+        <label htmlFor="name">Description:</label>
+        <input
+          type="text"
+          value={fields.description}
+          onChange={(e) => handleChange(e)}
+          name="description"
         />
         <label htmlFor="city">city:</label>
         <input
@@ -111,32 +130,18 @@ export default function CreateParty()  {
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
-            format="MM/dd/yyyy"
+            format="dd/MM/yyyy"
             margin="normal"
             id="date-picker-inline"
             label="Date picker inline"
             value={fields.date}
-            onChange={(e)=>handleChange(e)}
+            onChange={handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
           />
         </MuiPickersUtilsProvider>
-        <label htmlFor="musicType">musicType:</label>
-        <input
-          type="text"
-          value={fields.musicType}
-          onChange={(e) => handleChange(e)}
-          name="musicType"
-        />
 
-        <label htmlFor="age">age:</label>
-        <input
-          type="number"
-          value={fields.age}
-          onChange={(e) => handleChange(e)}
-          name="age"
-        />
         <label htmlFor="price">price:</label>
         <input
           type="number"
@@ -144,10 +149,15 @@ export default function CreateParty()  {
           onChange={(e) => handleChange(e)}
           name="price"
         />
-         
-        <label htmlFor="images">Photo: </label>
+        <label htmlFor="maxAtendees">Maximum number of atendees:</label>
+        <input
+          type="number"
+          value={fields.maxAttendees}
+          onChange={(e) => handleChange(e)}
+          name="maxAttendees"
+        />
+        <label htmlFor="images">Upload images </label>
         <input type="file" name="images" onChange={(e) => handleChange(e)} />
-       
 
         <button type="submit">Create party</button>
       </form>

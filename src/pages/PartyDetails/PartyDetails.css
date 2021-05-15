@@ -1,0 +1,35 @@
+body{
+    margin: 60px 200px;
+}
+.gallery {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 386px;
+    width: 800px;
+    
+}
+.city{
+    margin: 0px;
+}
+.title{
+    display: inline-block;
+   margin-bottom: 10px;
+   margin-right: 10px;
+    
+}
+
+.calendar{
+    color:#727171;
+    
+   
+}
+.host{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.images{
+    margin: 5px;
+    border-radius: 8px;
+}
