@@ -2,7 +2,14 @@
     color: black;
     opacity: 1;
 }
+.input:hover{
+background: rgb(224, 224, 224);
+}
 
 .post-btn::first-letter{
     text-transform: capitalize;
+}
+
+.form{
+    all: 
 }

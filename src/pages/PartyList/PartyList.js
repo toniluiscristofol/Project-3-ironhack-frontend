@@ -95,15 +95,7 @@ class PartyList extends Component {
           value={this.state.name}
           placeholder="City"
         /> */}
-        {/* <TextField
-          onChange={(e) => this.filterParties(e)}
-          type="text"
-          name="city"
-          value={this.state.name}
-          id="outlined-basic"
-          label="Outlined"
-          variant="outlined"
-        /> */}
+        
         <div className="parties">{this.displayParties()}</div>
       </div>
     );

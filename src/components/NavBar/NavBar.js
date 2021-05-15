@@ -23,7 +23,7 @@ import {
 } from "@material-ui/pickers";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-
+import PartyService from "../../services/parties.service";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -93,14 +93,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [city, setCity] = React.useState("");
+  const [date, setDate] = React.useState(new Date(Date.now()));
+  const [redirect, setRedirect] = React.useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const partyService = new PartyService();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    partyService
+      .getByCity(city)
+      .then(() => {
+        console.log("Found some parties");
+        setRedirect(true)
+        setCity("")
+        setDate(new Date(Date.now()))
+
+          props.history.push("/parties");
+        
+      })
+      .catch((err) => console.error(err));
+  };
+  const handleChange = (event) => {
+    setCity(event.target.value)
+  }
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -117,7 +139,7 @@ export default function NavBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -175,58 +197,83 @@ export default function NavBar() {
             <div className={classes.searchIcon}>
               <SearchIcon
                 style={{
-                  marginLeft: "300px",
+                  marginLeft: "200px",
                   background: "#f50057",
                   borderRadius: "50%",
                   padding: "4px",
                 }}
               />
             </div>
-            <InputBase
-              style={{
-                marginLeft: "300px",
-                borderRadius: "30px 0px 0px 30px",
-                width: "15vw",
-                border: "2px solid #c7c7c7",
-                color: "black",
-                marginTop: "15px",
-                marginRight: "0px",
-                marginBottom: "10px",
-                padding: "7px 5px",
-                borderRight: "none",
-              }}
-              placeholder="Search by city"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-              className="input"
-            />
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
+            <form id="myform" onSubmit={(e) => handleSubmit(e)}>
+              <InputBase
+                onChange={(e) => handleChange(e)}
+                value={city}
+                form="myform"
+                name="city"
                 style={{
-                  marginLeft: "0px",
+                  marginLeft: "200px",
+                  borderRadius: "30px 0px 0px 30px",
+                  width: "15vw",
                   border: "2px solid #c7c7c7",
-                  borderRadius: "0px 30px 30px 0px",
-                  paddingBottom: "8px",
+                  color: "black",
+                  marginTop: "15px",
+                  marginRight: "0px",
+                  marginBottom: "10px",
+                  padding: "7px 5px",
+                  borderRight: "none",
                 }}
-                InputProps={{
-                  disableUnderline: true,
+                placeholder="Search by city"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
                 }}
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Search by date"
-                // value={fields.date}
-                // onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  "aria-label": "change date",
-                }}
+                inputProps={{ "aria-label": "search" }}
               />
-            </MuiPickersUtilsProvider>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  form="myform"
+                  className="input"
+                  style={{
+                    marginLeft: "0px",
+                    marginRight: "100px",
+                    border: "2px solid #c7c7c7",
+                    borderRadius: "0px 30px 30px 0px",
+                    paddingBottom: "8px",
+                  }}
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Search by date"
+                  // value={fields.date}
+                  // onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+              <Button
+                type="submit"
+                form="myform"
+                style={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  position: "absolute",
+                  top: "25px",
+                  right: "0px",
+                  fontSize: "12px",
+                }}
+                variant="contained"
+                color="secondary"
+                className="post-btn"
+              >
+                Search
+              </Button>
+            </form>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -234,13 +281,13 @@ export default function NavBar() {
               <Button
                 style={{
                   borderRadius: "30px",
-                  padding: "10px 30px",
+                  padding: "10px 20px",
                   position: "absolute",
                   top: "25px",
-                  right: "150px",
+                  right: "100px",
                   fontSize: "12px",
                 }}
-                variant="contained"
+                variant="outlined"
                 color="secondary"
                 className="post-btn"
               >
@@ -260,7 +307,7 @@ export default function NavBar() {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                color="red"
+                color="default"
               >
                 <AccountCircle />
               </IconButton>

@@ -11,6 +11,7 @@ export default class PartyService{
 
   create = data => this.instance.post("/", data);
   get = () => this.instance.get("/");
+  getByCity = data => this.instance.get(`/search?city=${data}`)
   getOne = id => this.instance.get(`/${id}`);
   deleteOne = id => this.instance.delete(`/${id}`);
   updateOne = (id, data) => this.instance.put(`/${id}`, data);
