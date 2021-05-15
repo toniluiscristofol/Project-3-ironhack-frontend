@@ -14,9 +14,10 @@
     margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
-    margin-left: 80px;
+    margin: 10%;
     flex-direction: column;
     align-items: center;
+    
     justify-content: center;
 }
 
@@ -101,7 +102,12 @@
 */
 body {
     background: #654ea3;
+    background-repeat: no-repeat;
+    background-size: cover;
     background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
     background: linear-gradient(to right, #654ea3, #eaafc8);
     min-height: 100vh;
+    
 }
+
+

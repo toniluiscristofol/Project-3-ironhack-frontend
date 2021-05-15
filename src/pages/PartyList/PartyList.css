@@ -1,4 +1,22 @@
 .party-card{
-    display: grid;
+    
     margin: 20px;
+}
+.navbar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    
+}
+
+.nav{
+background: red;
+}
+
+.parties{
+    position: absolute;
+    top: 92px;
+    left: 0px;
+
 }

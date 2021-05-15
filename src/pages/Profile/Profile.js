@@ -73,8 +73,8 @@ class Profile extends Component {
 
        
         
-    <div class="row py-5 px-4">
-        <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
+    <div id="profile" class="row py-5 px-4">
+        <div   class="col-xl-4 col-md-6 col-sm-10 mx-auto">
     
             
             <div class="bg-white shadow rounded overflow-hidden">
@@ -93,7 +93,7 @@ class Profile extends Component {
                 <div class="bg-light p-4 d-flex justify-content-end text-center">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block">241</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Photos</small>
+       <h5 class="font-weight-bold mb-0 d-block">{this.state.parties.length}</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Number of parties hosted</small>
                         </li>
                         <li class="list-inline-item">
                             <h5 class="font-weight-bold mb-0 d-block">84K</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>

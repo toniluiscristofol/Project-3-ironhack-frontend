@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto',
         sans-serif;
+        
 }
 .home-wrapper{
     display: flex;
@@ -10,12 +11,25 @@ body {
     height:100vh;
     /* background: url("/public/pexels-eberhard-grossgasteiger-2098428.jpg"); */
 }
-.search-bar input{
-    position: absolute;
-    left: 40vw;
-}
+
 .home-wrapper h1{
-    width: 50vw;
-    text-align: center;
+    
+    font-size: 60px;
 }
+
+.navbar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+
+}
+
+.auth-btns button{
+margin: 5px;
+font-size: 12px;
+
+}
+    
+
 

@@ -1,0 +1,11 @@
+.input::placeholder {
+    color: black;
+    opacity: 1;
+   
+}
+
+.post-btn::first-letter{
+    text-transform: capitalize;
+   
+
+}

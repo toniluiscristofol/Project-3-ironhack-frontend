@@ -5,29 +5,46 @@ import Text from '../../components/Text'
 import "./Home.css"
 import SearchBar from '../../components/SearchBar/SearchBar'
 import Button from "@material-ui/core/Button";
+import NavBar from '../../components/NavBar/NavBar'
 function Home() {
   return (
-    <div className="search-bar">
-      <div className="button-container">
-        <Link to="/signup">
-          <Button variant="contained" color="secondary">
-            Sign Up
-          </Button>
-        </Link>
-        <Link to="/login">
-          <Button variant="contained" color="secondary">
-            Log In
-          </Button>
-        </Link>
+    <div
+      style={{ background: "/pexels-eberhard-grossgasteiger-2098428.jpg" }}
+      className="search-bar"
+    >
+      <div className="navbar">
+        <NavBar />
       </div>
-      <SearchBar />
+      <div className="button-container"></div>
+
       <div className="home-wrapper">
         <h1>Discover your next wild night.</h1>
-
-        <div className="button-container">
-          <Link to="/create-party">
-            <Button variant="contained" color="secondary">
-              Create party
+        <div className="auth-btns">
+          <Link style={{ textDecoration: "none" }} to="/signup">
+            <Button
+              style={{ borderRadius: "30px" }}
+              variant="contained"
+              color="secondary"
+            >
+              Sign Up
+            </Button>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to="/login">
+            <Button
+              style={{ borderRadius: "30px" }}
+              variant="contained"
+              color="secondary"
+            >
+              Log In
+            </Button>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to="/parties">
+            <Button
+              style={{ borderRadius: "30px" }}
+              variant="contained"
+              color="secondary"
+            >
+              All parties
             </Button>
           </Link>
         </div>
