@@ -19,36 +19,39 @@ const useStyles = makeStyles({
 });
 
 
-export default function Party({ name, description, city }) {
-  console.log(city)
-  const classes = useStyles();
+export default function Party({ name, street, images, price,date, attendees, maxAttendees, city }) {
+  
+
     return (
-      <Card className="card" className={classes.root}>
+      <Card className="card">
         <CardActionArea>
           <Box display="flex" p={1}>
             <CardMedia
               className="image"
               component="img"
-              alt="Contemplative Reptile"
-              height="140"
-              image="/house1.jpg"
-              title="Contemplative Reptile"
+              alt="party-image"
+              height="200"
+              image={images[0]}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+            <CardContent className="content">
+              <Typography gutterBottom variant="h6" component="h2">
                 {name}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {description}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {city}
-              </Typography>
+              <span>{date.substring(0, 15)}</span>
+              <hr className="hr1" />
+
+              <p>
+                {street}, {city}
+              </p>
+
+              <p>
+                {attendees.length} attendees (max: {maxAttendees})
+              </p>
+              <p>{price}€</p>
+              <p>Average rating of reviews</p>
             </CardContent>
           </Box>
         </CardActionArea>
-
-        <CardActions></CardActions>
       </Card>
     );
 }

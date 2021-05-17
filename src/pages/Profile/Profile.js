@@ -20,7 +20,7 @@ class Profile extends Component {
   refreshState() {
     this.authService.isLoggedIn()
       .then(response => {
-        console.log("hola",response.data);
+        
         this.setState({ username: response.data.username, photo: response.data.photo});
       })
       .catch(err => console.error(err))
@@ -34,7 +34,7 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <img src={this.state.photo}></img>
+                <img src={this.state.photo} alt="profile-pic"></img>
                 <p></p>
                 WELCOME {this.state.username}
                 <Link to='edit-user'><button>Edit User</button></Link>

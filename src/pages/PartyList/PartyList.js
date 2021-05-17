@@ -1,62 +1,126 @@
-import React, { Component } from 'react'
+import React, {useState, useEffect} from 'react'
 import PartyCard from '../../components/Party/PartyCard';
-import Text from '../../components/Text';
-import Todo from '../../components/Todo/Todo';
 import { withAuth } from '../../context/auth.context';
 import PartyService from '../../services/parties.service'
 import "./PartyList.css"
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import Input from "@material-ui/core/Input";
+import { Link, withRouter } from "react-router-dom";
+import ReactMapGL, { Marker } from "react-map-gl"
 import Navbar from "../../components/NavBar/NavBar"
+import { makeStyles } from "@material-ui/core/styles";
 
-class PartyList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      parties: [],
-      city: ""
-    };
-    this.partyService = new PartyService();
-    // this.refreshState = this.refreshState.bind(this);
-  }
-  filterParties(event) {
-    const arrayCopy = [...this.state.parties];
-    const { city, value } = event.target;
+const useStyles = makeStyles((theme) => ({
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
 
-    this.setState({
-      name: value,
-    });
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "7px",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(2, 1, 1, 0),
 
-    if (value) {
-      console.log(value);
-      const result = arrayCopy.filter((party) => party.city.toLowerCase().includes(value.toLowerCase()));
-      this.setState({
-        parties: result,
-      });
-    } else if (value.length === 0) {
-      this.refreshState();
-    }
-  }
-  refreshState() {
-    this.partyService
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+}));
+
+function PartyList(props) {
+  
+
+  const[parties, setParties] = useState([]);
+  const[city, setCity] = useState("");
+  const[viewport, setViewport] = useState({
+    latitude: 41.38879,
+        longitude: 2.15899,
+        width: "50vw",
+        height: "100vh",
+        zoom: 10
+  })
+  
+  const partyService = new PartyService();
+
+  console.log(parties)
+  const refreshState = () => {
+    partyService
       .get()
       .then((response) => {
-        console.log(response.data);
-        this.setState({ parties: response.data });
+       
+        setParties(response.data);
       })
       .catch((err) => console.error(err));
   }
 
-  componentDidMount() {
-    this.refreshState();
+  const findByCity = (query) => {
+   
+    return setParties(
+        
+        parties.filter((party) => {
+           return party.city.toLowerCase().includes(query.toLowerCase());
+        }
+         
+        )
+      );
+    
+    
   }
 
-  displayParties() {
-    const { parties } = this.state;
-    console.log(parties);
+  const findByDate = (date) => {
+    return setParties(
+      parties.filter(party => {
+        return party.date.substring(0,10) === String(date).substring(0,10)
+      })
+    )
+  }
+  
+    
+    
+
+  
+   useEffect(() => {
+    refreshState();
+   }, [])
+   
+  
+  
+
+  const displayParties = () => {
+    
+  
     return parties.map((party) => {
       
       return (
@@ -67,9 +131,9 @@ class PartyList extends Component {
             to={`/party-details/${party.id}`}
           >
             <PartyCard
-              refreshState={() => this.refreshState()}
+              
               {...party}
-              city={party.city}
+              
             />
           </Link>
         </div>
@@ -77,29 +141,32 @@ class PartyList extends Component {
     });
   }
 
-  handleLogout = () => {
-    this.props.logout();
-  };
+  
 
-  render() {
+  
     return (
       <div className="party-card">
         <div className="navbar">
-          <Navbar className="nav" />
+          <Navbar findByDate={(time => findByDate(time))} findByCity={(query) => findByCity(query)} isHomePage={false} />
         </div>
+        <h1 className="title">Parties in Barcelona</h1>
 
-        {/* <Input
-          onChange={(e) => this.filterParties(e)}
-          type="text"
-          name="city"
-          value={this.state.name}
-          placeholder="City"
-        /> */}
         
-        <div className="parties">{this.displayParties()}</div>
+
+        <div className="parties">{displayParties()}</div>
+        {/* <ReactMapGL
+          {...viewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          onViewportChange={(viewport) => {
+            setViewport( viewport);
+          }}
+          mapStyle="Frank"
+        >
+          {/* parties.map(party => <Marker></Marker>) */}
+        {/* </ReactMapGL> */} 
       </div>
     );
   }
-}
+
 
 export default withAuth(PartyList);

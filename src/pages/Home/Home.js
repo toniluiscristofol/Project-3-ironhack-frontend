@@ -13,7 +13,7 @@ function Home() {
       className="search-bar"
     >
       <div className="navbar">
-        <NavBar />
+        <NavBar isHomePage={true} />
       </div>
       <div className="button-container"></div>
 

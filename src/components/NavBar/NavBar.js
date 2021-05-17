@@ -1,20 +1,12 @@
 import React from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import "./NavBar.css"
+import "./NavBar.css";
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
 import {
@@ -22,7 +14,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PartyService from "../../services/parties.service";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,19 +24,10 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
+
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    // backgroundColor: fade("#000", 0.8),
-    // "&:hover": {
-    //   backgroundColor: fade("#E3E3E3", 0.9),
-    // },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
@@ -67,11 +50,8 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    
     padding: theme.spacing(2, 1, 1, 0),
-    
-    
-    // vertical padding + font size from searchIcon
+
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -79,12 +59,7 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
+
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {
@@ -93,93 +68,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar(props) {
+function NavBar(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
   const [city, setCity] = React.useState("");
   const [date, setDate] = React.useState(new Date(Date.now()));
-  const [redirect, setRedirect] = React.useState(false);
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const partyService = new PartyService();
 
+  const partyService = new PartyService();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+    console.log(city);
     partyService
       .getByCity(city)
-      .then(() => {
+      .then((response) => {
         console.log("Found some parties");
-        setRedirect(true)
-        setCity("")
-        setDate(new Date(Date.now()))
-
-          props.history.push("/parties");
+        props.history.push({
+          pathname: "/parties",
+          state: {parties: response.data}
+          })
         
+        
+        // this.props.history.push({
+        //   pathname: "/template",
+        //   search: "?query=abc",
+        //   state: { detail: response.data },
+        // });
       })
       .catch((err) => console.error(err));
   };
   const handleChange = (event) => {
-    setCity(event.target.value)
-  }
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setCity(event.target.value);
+    props.findByCity(city)
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  const handleDateChange = (date) => {
+    const newDate = new Date(date);
+    setDate(newDate)
+    props.findByDate(date)
+     
+    }
   
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <Link style={{ textDecoration: "none" }} to="/create-party">
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </Link>
-    </Menu>
-  );
+  const handleSearch = (event) => {
+    setCity(event.target.value);
+  }
+
+ 
 
   return (
     <div className={classes.grow}>
@@ -204,76 +139,128 @@ export default function NavBar(props) {
                 }}
               />
             </div>
-            <form id="myform" onSubmit={(e) => handleSubmit(e)}>
-              <InputBase
-                onChange={(e) => handleChange(e)}
-                value={city}
-                form="myform"
-                name="city"
-                style={{
-                  marginLeft: "200px",
-                  borderRadius: "30px 0px 0px 30px",
-                  width: "15vw",
-                  border: "2px solid #c7c7c7",
-                  color: "black",
-                  marginTop: "15px",
-                  marginRight: "0px",
-                  marginBottom: "10px",
-                  padding: "7px 5px",
-                  borderRight: "none",
-                }}
-                placeholder="Search by city"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  form="myform"
-                  className="input"
+            {props.isHomePage ? (
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <InputBase
+                  onChange={(e) => handleSearch(e)}
+                  value={city}
+                  name="city"
                   style={{
-                    marginLeft: "0px",
-                    marginRight: "100px",
+                    marginLeft: "200px",
+                    borderRadius: "30px 0px 0px 30px",
+                    width: "15vw",
                     border: "2px solid #c7c7c7",
-                    borderRadius: "0px 30px 30px 0px",
-                    paddingBottom: "8px",
+                    color: "black",
+                    marginTop: "15px",
+                    marginRight: "0px",
+                    marginBottom: "10px",
+                    padding: "7px 5px",
+                    borderRight: "none",
                   }}
-                  InputProps={{
-                    disableUnderline: true,
+                  placeholder="Search by city"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
                   }}
-                  disableToolbar
-                  variant="inline"
-                  format="dd/MM/yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="Search by date"
-                  // value={fields.date}
-                  // onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
+                  inputProps={{ "aria-label": "search" }}
                 />
-              </MuiPickersUtilsProvider>
-              <Button
-                type="submit"
-                form="myform"
-                style={{
-                  borderRadius: "30px",
-                  padding: "10px 20px",
-                  position: "absolute",
-                  top: "25px",
-                  right: "0px",
-                  fontSize: "12px",
-                }}
-                variant="contained"
-                color="secondary"
-                className="post-btn"
-              >
-                Search
-              </Button>
-            </form>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    className="input"
+                    style={{
+                      marginLeft: "0px",
+                      marginRight: "100px",
+                      border: "2px solid #c7c7c7",
+                      borderRadius: "0px 30px 30px 0px",
+                      paddingBottom: "8px",
+                    }}
+                    InputProps={{
+                      disableUnderline: true,
+                    }}
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Search by date"
+                    value={date}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+                <Button
+                  type="submit"
+                  style={{
+                    borderRadius: "30px",
+                    padding: "10px 20px",
+                    position: "absolute",
+                    top: "25px",
+                    right: "0px",
+                    fontSize: "12px",
+                  }}
+                  variant="contained"
+                  color="secondary"
+                  className="post-btn"
+                >
+                  Search
+                </Button>
+              </form>
+            ) : (
+                <div>
+                  <InputBase
+                    
+                  onChange={(e) => handleChange(e)}
+                  value={city}
+                  name="city"
+                  style={{
+                    marginLeft: "200px",
+                    borderRadius: "30px 0px 0px 30px",
+                    width: "15vw",
+                    border: "2px solid #c7c7c7",
+                    color: "black",
+                    marginTop: "15px",
+                    marginRight: "0px",
+                    marginBottom: "10px",
+                    padding: "7px 5px",
+                    borderRight: "none",
+                  }}
+                  placeholder="Search by city"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    className="input"
+                    style={{
+                      marginLeft: "0px",
+                      marginRight: "100px",
+                      border: "2px solid #c7c7c7",
+                      borderRadius: "0px 30px 30px 0px",
+                      paddingBottom: "8px",
+                    }}
+                    InputProps={{
+                      disableUnderline: true,
+                    }}
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Search by date"
+                    value={date}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+                </div>
+            )}
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -305,8 +292,6 @@ export default function NavBar(props) {
                 }}
                 edge="end"
                 aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
                 color="default"
               >
                 <AccountCircle />
@@ -315,20 +300,19 @@ export default function NavBar(props) {
           </div>
           <div className={classes.sectionMobile}>
             <Link style={{ textDecoration: "none" }} to="/create-party">
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                color="inherit"
-              >
+              <IconButton color="inherit">
                 <AccountCircle />
               </IconButton>
             </Link>
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </div>
   );
 }
+
+export default withRouter(NavBar);
+
+
+
+ 

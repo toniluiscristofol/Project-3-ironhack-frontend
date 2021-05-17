@@ -6,7 +6,34 @@ body {
 
 .card{
     margin-bottom: 100px;
+    width: 50vw;
 }
 .image{
-    border-radius:5px;
+    border-radius:15px;
+    width: 300px;
 }
+
+.party-info{
+    margin-bottom: 50px;
+}
+
+.content{
+    width: 1000px;
+}
+.hr1 {
+    border: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1)
+}
+.rating{
+    margin-top: 10px;
+}
+
+
+
+.content p{
+    color: #969696;
+    font-size: 15px;
+    font-weight:100
+}
+
