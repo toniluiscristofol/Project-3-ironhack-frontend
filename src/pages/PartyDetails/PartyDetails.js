@@ -7,45 +7,61 @@ import EventIcon from "@material-ui/icons/Event";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "./PartyDetails.css"
 import Button from "@material-ui/core/Button";
+import NavBar from '../../components/NavBar/NavBar';
+import { withAuth } from '../../context/auth.context';
+import AuthService from '../../services/auth.service'
+import { Link } from "react-router-dom";
 
-export default class PartyDetails extends React.Component {
+
+class PartyDetails extends React.Component {
 
 
     constructor(props) {
         super(props);
         this.state = {
-          party: {
-            name: "",
-            description: "",
-            images: [],
-            price: 0,
-            date: "",
-            host: "",
-            maxAttendees: "",
-            attendees: [],
-            street: "",
-            city: ""
-          }
+          name: "",
+          date:"",
+          images:[],
+          ateendees: [],
+          price: 0,
+          description:"",
+          city:"",
+          host:"",
+          street:"",
+          id:"",
+          maxAttendees: 0
         }
         this.partyService = new PartyService();
-        
-        console.log(this.state)
+      
         
       }
 
 
 
     refreshState(id) {
-       
+        console.log(id)
         this.partyService.getOne(id)
           .then(response => {
-              
-            
-            this.setState({ party: response.data });
+            console.log(response.data.name)
+            console.log(response.data)
+            this.setState({maxAttendees: response.data.maxAttendees, ateendees: response.data.attendees, id: response.data.id, host: response.data.host.email, name: response.data.name, date: response.data.date, images:response.data.images, description: response.data.description, city: response.data.city, street: response.data.street, price:response.data.price });
           })
           .catch(err => console.error(err))
       }
       
+    joinparty(id, userId){
+      console.log(id,userId)
+
+      this.partyService.updateAttendees(id, userId)
+      .then(() =>{
+        console.log("updated")
+      })
+      .catch(err => console.log("error"))
+
+       this.refreshState(this.props.match.params.id);
+
+
+     }
     componentDidMount() {
         this.refreshState(this.props.match.params.id);
         
@@ -53,66 +69,90 @@ export default class PartyDetails extends React.Component {
     
    
       
-  
-  
-
   render() {
-    const { name, description, images, price, host, attendees, maxAttendees, street, date, city } = this.state.party;
-    console.log(typeof date)
+     
+
+    const { name, description, images, price, host, ateendees, maxAttendees, street, date, city, id} = this.state;
     return (
-      <div className="party-details">
+      <div>
+          <NavBar></NavBar>
+          <div className="party-details">
         <h1 className="title">{name}</h1>{" "}
-        <span className="calendar">{date.substring(0, 15)}</span>
-        {/* <span>
-          {attendees.length}/{maxAttendees}
-        </span> */}
-        <p className="city">{city}</p>
+        <span className="calendar">{date.substring(0,15)}</span>
+        <span>
+          
+        </span>
+        
         <div className="gallery">
           <img
             border-radius="5px"
             className="images"
             width="564"
             height="376"
-            src="https://a0.muscache.com/im/pictures/93b2e37b-9e4f-43f1-bab7-97aa11c8ce45.jpg?im_w=1200"
+            src={images[0] ? images[0]: "https://lh3.googleusercontent.com/proxy/fDpqucFrfTh1PgQTIvyabkaAuwBeyvHkwV5qp01OEbygW2yOOx9iTiht3t7koUdAXCYcYOQz_9EJk4io7_wRFmP5OQyOaITKkBIDEPL9zN_kgZ1txVCa5e79jcv-bhCGkGDUYFVcR8g4OftlEF4qkv5IKimyMXtDSuoOY8T4Hn4i"}
             alt=""
           />
           <img
             className="images"
             width="274"
             height="183"
-            src="https://a0.muscache.com/im/pictures/76665e67-73e9-40bb-b4c1-e54b8557ea6d.jpg?im_w=1440"
+            src={images[1] ? images[1]: "https://lh3.googleusercontent.com/proxy/fDpqucFrfTh1PgQTIvyabkaAuwBeyvHkwV5qp01OEbygW2yOOx9iTiht3t7koUdAXCYcYOQz_9EJk4io7_wRFmP5OQyOaITKkBIDEPL9zN_kgZ1txVCa5e79jcv-bhCGkGDUYFVcR8g4OftlEF4qkv5IKimyMXtDSuoOY8T4Hn4i"}
             alt=""
           />
           <img
             className="images"
             width="274"
             height="183"
-            src="https://a0.muscache.com/im/pictures/c0fbe432-7ba2-4d0d-923c-ad9a045fdad4.jpg?im_w=1440"
+            src={images[2] ? images[2]: "https://lh3.googleusercontent.com/proxy/fDpqucFrfTh1PgQTIvyabkaAuwBeyvHkwV5qp01OEbygW2yOOx9iTiht3t7koUdAXCYcYOQz_9EJk4io7_wRFmP5OQyOaITKkBIDEPL9zN_kgZ1txVCa5e79jcv-bhCGkGDUYFVcR8g4OftlEF4qkv5IKimyMXtDSuoOY8T4Hn4i"}
             alt=""
           />
           <img
             className="images"
             width="274"
             height="183"
-            src="https://a0.muscache.com/im/pictures/2b6cc4b6-9dab-43a7-9a20-19dcc396ef1c.jpg?im_w=1440"
+            src={images[3] ? images[3]: "https://lh3.googleusercontent.com/proxy/fDpqucFrfTh1PgQTIvyabkaAuwBeyvHkwV5qp01OEbygW2yOOx9iTiht3t7koUdAXCYcYOQz_9EJk4io7_wRFmP5OQyOaITKkBIDEPL9zN_kgZ1txVCa5e79jcv-bhCGkGDUYFVcR8g4OftlEF4qkv5IKimyMXtDSuoOY8T4Hn4i"}
             alt=""
           />
           <img
             className="images"
             width="274"
             height="183"
-            src="https://a0.muscache.com/im/pictures/c8fb9f46-74e7-4b0f-bb67-7eca2381518e.jpg?im_w=1440"
+            src={images[4] ? images[4]: "https://lh3.googleusercontent.com/proxy/fDpqucFrfTh1PgQTIvyabkaAuwBeyvHkwV5qp01OEbygW2yOOx9iTiht3t7koUdAXCYcYOQz_9EJk4io7_wRFmP5OQyOaITKkBIDEPL9zN_kgZ1txVCa5e79jcv-bhCGkGDUYFVcR8g4OftlEF4qkv5IKimyMXtDSuoOY8T4Hn4i"}
             alt=""
           />
         </div>
-        <p className="host">Host: {host.username}</p>
-        <span>
-          {" "}
-          <Button variant="contained" color="secondary">
-            Create party
-          </Button>
-        </span>
+
+
+        {/* <hr style="width:50%;text-align:left;margin-left:0"></hr> */}
+        <div className="section2">
+         
+          <div className="information">
+          <p className="city">Host:{host}</p>
+          <p className="city">City:{city}</p>
+          <p className="city">Direction:{street}</p>
+          <p className="city">Description:{description}</p>
+          <p className="city">People joined {ateendees.length} of {maxAttendees}</p> 
+
+          </div>
+          <div className="jointhisparty">
+            <div id="price">
+              Price: {price}€
+
+            </div>
+            <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's s mmy text of the printing and typesetting industry. Lorem Ipsum has been the industry's s.</p>
+            <Button onClick={()=> this.joinparty(this.props.match.params.id, this.props.user.id)}  id="joinpartybutton" variant="contained" color="secondary">
+            Join this Party
+            </Button>
+            <Link to={`/edit-party/${this.props.match.params.id}`}><Button>Edit Party</Button></Link>
+
+
+            
+          </div>
+        </div>
+      </div>
       </div>
     );
   }
 }
+
+export default withAuth(PartyDetails);

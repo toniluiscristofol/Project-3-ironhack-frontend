@@ -15,6 +15,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import "./PartyCard2.css";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({title, image, description}) {
+export default function RecipeReviewCard({title, image, description, date, userphoto}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -49,7 +50,7 @@ export default function RecipeReviewCard({title, image, description}) {
   };
 
   return (
-    <Card  className={classes.root}>
+    <Card id="card2" className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -62,7 +63,7 @@ export default function RecipeReviewCard({title, image, description}) {
           </IconButton>
         }
         title={title}
-        subheader="September 14, 2016"
+        // subheader={date.substring(0, 15)}
       />
       <CardMedia
         className={classes.media}

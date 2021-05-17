@@ -9,6 +9,7 @@ import Profile from './pages/Profile/Profile';
 import PartyList from './pages/PartyList/PartyList';
 import PartyDetails from './pages/PartyDetails/PartyDetails';
 import CreateParty from './components/CreateParty/CreateParty';
+import EditParty from './components/CreateParty/EditParty';
 import EditUser from './pages/EditUser/EditUser'
 import "@fontsource/roboto";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +19,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
+        <PrivateRoute path="/edit-party/:id" component={EditParty}></PrivateRoute>
         <PrivateRoute
           path="/create-party"
           component={CreateParty}

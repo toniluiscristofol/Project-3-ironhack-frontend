@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 import { withAuth } from '../../context/auth.context';
 
 
@@ -77,7 +77,8 @@ class EditUser extends Component {
           <label htmlFor="photo">Photo: </label>
           <input type="file" name="photo" onChange={(e) => this.handleChange(e)} />
         </div>
-        <button type="submit">EDIT</button>
+        <Link style={{ textDecoration: "none" }} to="/profile"> <button type="submit">EDIT</button></Link>
+       
       </form>
     )
   }

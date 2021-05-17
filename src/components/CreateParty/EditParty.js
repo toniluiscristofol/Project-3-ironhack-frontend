@@ -1,6 +1,6 @@
 import React from "react";
 import PartyService from "../../services/parties.service";
-import NavBar from '../../components/NavBar/NavBar';
+import NavBar from '../NavBar/NavBar';
 import "./CreateParty.css";
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
@@ -50,7 +50,7 @@ export default function CreateParty() {
     });
     // uploadData.append(fields.images, images[0])
     partyService
-      .create(uploadData)
+      .editparty(this.props.match.params.id, uploadData)
       .then(() => {
         console.log("Created");
 
@@ -71,7 +71,6 @@ export default function CreateParty() {
   };
   const handleDateChange = (date) => {
     const newDate = new Date(date);
-    console.log(new Date(date))
     setFields({
       ...fields,
       date: newDate,
@@ -168,15 +167,3 @@ export default function CreateParty() {
     </div>
   );
 }
-
-// name: {type: String, required: true},
-// description: {type: String, required: true},
-// images: {type: Array, required: true},
-// date: {type: Date, required: true},
-// city: {type: String},
-// street: {type: String},
-// ageInterval: {type: String},
-// musicType: {type: String},
-// price: {type: Number},
-// attendants: [{type: Schema.Types.ObjectId,ref:'User'}],
-// smoking: {type: Boolean}
