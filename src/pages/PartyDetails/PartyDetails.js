@@ -1,10 +1,9 @@
-import { id } from 'date-fns/locale';
+
 import React from 'react'
 import PartyService from '../../services/parties.service'
 import "photoswipe/dist/photoswipe.css";
 import "photoswipe/dist/default-skin/default-skin.css";
-import EventIcon from "@material-ui/icons/Event";
-import { Gallery, Item } from "react-photoswipe-gallery";
+
 import "./PartyDetails.css"
 import Button from "@material-ui/core/Button";
 import NavBar from '../../components/NavBar/NavBar';

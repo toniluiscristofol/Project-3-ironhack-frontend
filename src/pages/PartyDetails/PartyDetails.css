@@ -1,6 +1,4 @@
-/* body{
-    margin: 60px 200px;
-} */
+
 .gallery {
     display: flex;
     flex-direction: column;
@@ -88,4 +86,4 @@ align-self: center;
     align-self: flex-start;
     font-size: 20px;
     font-weight: bolder;
-}
+} 

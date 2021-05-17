@@ -1,14 +1,16 @@
 import React from "react";
 import PartyService from "../../services/parties.service";
-import NavBar from '../../components/NavBar/NavBar';
+import { withRouter } from "react-router";
+import NavBar from '../NavBar/NavBar';
 import "./CreateParty.css";
 import DateFnsUtils from "@date-io/date-fns";
+
 import "date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import { Redirect } from "react-router";
+
 
 // const validators = {
 //   name: (value) => {
@@ -19,7 +21,7 @@ import { Redirect } from "react-router";
 //     return message;
 //   }
 // }
-export default function CreateParty() {
+ function CreateParty(props) {
   const [fields, setFields] = React.useState({
     name: "",
     description: "",
@@ -52,6 +54,7 @@ export default function CreateParty() {
     partyService
       .create(uploadData)
       .then(() => {
+        props.history.push("/parties");
         console.log("Created");
 
         setFields({
@@ -68,7 +71,8 @@ export default function CreateParty() {
         });
       })
       .catch((err) => console.error(err));
-  };
+   };
+   
   const handleDateChange = (date) => {
     const newDate = new Date(date);
     console.log(new Date(date))
@@ -168,6 +172,8 @@ export default function CreateParty() {
     </div>
   );
 }
+
+export default withRouter(CreateParty);
 
 // name: {type: String, required: true},
 // description: {type: String, required: true},
