@@ -145,7 +145,7 @@ function PartyList(props) {
 
   
     return (
-      <div className="party-card">
+      <div >
         <div className="navbar">
           <Navbar findByDate={(time => findByDate(time))} findByCity={(query) => findByCity(query)} isHomePage={false} />
         </div>

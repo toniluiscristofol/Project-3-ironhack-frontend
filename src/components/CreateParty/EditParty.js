@@ -19,7 +19,7 @@ import { Redirect } from "react-router";
 //     return message;
 //   }
 // }
-export default function CreateParty() {
+export default function CreateParty(props) {
   const [fields, setFields] = React.useState({
     name: "",
     description: "",
@@ -50,7 +50,7 @@ export default function CreateParty() {
     });
     // uploadData.append(fields.images, images[0])
     partyService
-      .editparty(this.props.match.params.id, uploadData)
+      .editparty(props.match.params.id, uploadData)
       .then(() => {
         console.log("Created");
 

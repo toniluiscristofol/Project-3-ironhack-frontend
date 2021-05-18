@@ -13,12 +13,14 @@ import EditParty from './components/CreateParty/EditParty';
 import EditUser from './pages/EditUser/EditUser'
 import "@fontsource/roboto";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import StripeContainer from './components/stripe/StripeContainer';
 
 function App() {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/stripe/:id" component={StripeContainer} />
         <PrivateRoute path="/edit-party/:id" component={EditParty}></PrivateRoute>
         <PrivateRoute
           path="/create-party"
@@ -38,6 +40,7 @@ function App() {
         <PrivateRoute  path="/party-details/:id" component={PartyDetails} />
         <PrivateRoute exact path="/profile/" component={Profile} />
         <PrivateRoute exact path="/edit-user/" component={EditUser} />
+
       </Switch>
     </div>
   );

@@ -106,22 +106,24 @@ class Profile extends Component {
           
            </div>   
            </div>  
+           <div class="titleprofile">
+           <h2>Your Created Parties</h2>
+           </div>
            <div className="section">
+         
            {this.state.parties.slice(this.state.parties.length-4).map((parties) => {
            return (
             <div className="partiescreated">
             <Link id="cards-party2" to={`/party-details/${parties.id}`}>
              <PartyCard2 userphoto={this.state.photo} date={parties.date} description={parties.description} title={parties.name} image={parties.images[0] ? parties.images[0] : "https://onlyibizaboatparty.com/img/clubberPack.jpg"}></PartyCard2>
-            
             </Link>
              <button onClick = {() => this.deleteParty(parties.id)} >Delete party</button>
-             
          </div>
-
           );
         })}
-        
-
+           </div>
+           <div class="titleprofile">
+           <h2>Your Joined Parties</h2>
            </div>
            <div className="section">
            {this.state.attendancees.slice(this.state.attendancees.length-4).map((parties) => {

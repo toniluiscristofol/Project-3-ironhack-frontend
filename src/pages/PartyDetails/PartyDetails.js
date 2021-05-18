@@ -143,7 +143,7 @@ class PartyDetails extends React.Component {
             Join this Party
             </Button>
             <Link to={`/edit-party/${this.props.match.params.id}`}><Button>Edit Party</Button></Link>
-
+            <Link to={`/stripe/${this.props.match.params.id}`}><Button>Buy Ticket</Button></Link>
 
             
           </div>

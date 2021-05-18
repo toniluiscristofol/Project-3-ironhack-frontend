@@ -19,5 +19,5 @@ export default class PartyService{
   getUserParties = (id) => this.instance.get(`/host/${id}`)
   getUserAttendancees = (id) => this.instance.get(`/attendees/${id}`)
   getgoingTo = (id) => this.instance.get(`/goingTo/${id}`)
-  editparty = (id, data) => this.instance.get(`/editParty/${id}`, data)
+  editparty = (id, data) => this.instance.put(`/editParty/${id}`, data)
 }
