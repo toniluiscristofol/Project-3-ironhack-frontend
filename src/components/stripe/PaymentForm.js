@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import Profile from '../../pages/Profile/Profile';
+import Button from "@material-ui/core/Button";
 import {
   CardElement,
   useElements,
@@ -15,18 +16,18 @@ const CARD_OPTIONS = {
   iconStyle: "solid",
   style: {
     base: {
-      iconColor: "#c4f0ff",
-      color: "#fff",
+      iconColor: "white",
+      color: "white",
       fontWeight: 500,
       fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
       fontSize: "16px",
       fontSmoothing: "antialiased",
-      ":-webkit-autofill": { color: "#fce883" },
-      "::placeholder": { color: "#87bbfd" },
+      ":-webkit-autofill": { color: "white" },
+      "::placeholder": { color: "white" },
     },
     invalid: {
-      iconColor: "#ffc7ee",
-      color: "#ffc7ee",
+      iconColor: "grey",
+      color: "grey",
     },
   },
 };
@@ -102,21 +103,28 @@ export default function PaymentForm(props) {
   return (
     <>
       {!succes ? (
-        <form onSubmit={handleSubmit}>
-            <h2>Hola</h2>
+          <div>
+        
+        <form class="payForm" onSubmit={handleSubmit}>
+        <img id="logopayment"src="/PILLOWTALK (3) (2).png"></img>
           <fieldset className="FormGroup">
             <div className="FormRow">
               <CardElement options={CARD_OPTIONS} />
             </div>
           </fieldset>
-          <button>Pay</button>
+      <button id="paybutton" >Pay {price}€</button>
         </form>
-      ) : (
-        <div>
-          <h2>
-            SUCCESFULL PAYMENT: YOU JOINED THIS PARTY!!!!!
-          </h2>
         </div>
+      ) : (
+        // <div class="succesfullpayment">
+        // <Link style={{ textDecoration: "none" }} to="/profile"></Link>
+        //      <img id="logopayment"src="/PILLOWTALK (3) (2).png"></img>
+        //   <h2>
+        //     SUCCESFULL PAYMENT: YOU JOINED THIS PARTY!!!!!
+        //   </h2>
+        // 
+        // </div>
+        <Profile></Profile>
       )}
     </>
   );

@@ -52,7 +52,7 @@ export default function CreateParty(props) {
     partyService
       .editparty(props.match.params.id, uploadData)
       .then(() => {
-        console.log("Created");
+        console.log("PARTY EDITED");
 
         setFields({
           name: "",
