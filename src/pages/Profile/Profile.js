@@ -6,7 +6,7 @@ import PartyCard from '../../components/Party/PartyCard';
 import { Link } from 'react-router-dom'
 import PartyCard2 from '../../components/Party/PartyCard2';
 import './Profile.css'
-import NavBar from '../../components/NavBar/NavBar';
+import HomeNavBar from '../../components/NavBar/HomeNavBar';
 
 class Profile extends Component {
 
@@ -86,11 +86,12 @@ class Profile extends Component {
        return(
 
        <div>
-        <NavBar></NavBar>
+        <HomeNavBar/>
  
     
          <div className="cover">
-           <div className="grey">
+             <div className="grey">
+               
            </div>
            <div className="white">
            </div>

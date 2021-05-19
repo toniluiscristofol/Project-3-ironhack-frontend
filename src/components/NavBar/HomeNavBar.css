@@ -1,0 +1,38 @@
+.nav{
+    
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+}
+.home-link1 {
+    position: absolute;
+    right: 200px;
+    top: 20px;
+    width: 200px;
+    
+}
+
+.home-link2 {
+    position: absolute;
+    left: 1000px;
+    top: 20px;
+
+}
+
+.home-link3 {
+    position: absolute;
+    left: 1200px;
+    top: 20px;
+}
+#post-btn{
+    position: absolute;
+    top: 20px;
+    right: 150px;
+}
+
+.user-icon{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
