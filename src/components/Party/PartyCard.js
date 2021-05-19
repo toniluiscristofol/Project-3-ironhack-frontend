@@ -34,21 +34,19 @@ export default function Party({ name, street, images, price,date, attendees, max
               image={images[0]}
             />
             <CardContent className="content">
-              <Typography gutterBottom variant="h6" component="h2">
-                {name}
-              </Typography>
-              <span>{date.substring(0, 15)}</span>
+              <b>{name}</b>{" "}
+              <span>
+                {}
+                {date.substring(0, 15)}
+              </span>
               <hr className="hr1" />
-
-              <p>
+              <span>
                 {street}, {city}
-              </p>
-
-              <p>
+              </span>
+              <span>
                 {attendees.length} attendees (max: {maxAttendees})
-              </p>
-              <p>{price}€</p>
-              <p>Average rating of reviews</p>
+              </span>
+              <span>{price}€</span>
             </CardContent>
           </Box>
         </CardActionArea>

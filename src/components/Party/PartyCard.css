@@ -5,7 +5,7 @@ body {
 }
 
 .card{
-    margin-bottom: 100px;
+    margin-bottom: 0px;
     width: 50vw;
 }
 .image{
@@ -34,6 +34,11 @@ body {
 .content p{
     color: #969696;
     font-size: 15px;
-    font-weight:100
+    font-weight:100;
+    padding: 0px;
 }
 
+.content span{
+    color: #969696;
+    display: block
+}

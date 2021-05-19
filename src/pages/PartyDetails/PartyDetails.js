@@ -38,11 +38,10 @@ class PartyDetails extends React.Component {
 
 
     refreshState(id) {
-        console.log(id)
+        
         this.partyService.getOne(id)
           .then(response => {
-            console.log(response.data.name)
-            console.log(response.data)
+            
             this.setState({maxAttendees: response.data.maxAttendees, ateendees: response.data.attendees, id: response.data.id, host: response.data.host, name: response.data.name, date: response.data.date, images:response.data.images, description: response.data.description, city: response.data.city, street: response.data.street, price:response.data.price });
           })
           .catch(err => console.error(err))

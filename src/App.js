@@ -34,10 +34,20 @@ function App() {
           component={Signup}
           redirectPath="/parties"
         />
-        <AnonRoute exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} redirectPath="/parties" />
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute  path="/party-details/:id" component={PartyDetails} />
+        <AnonRoute
+          exact
+          path="/login"
+          component={Login}
+          redirectPath="/parties"
+        />
+        <Route
+          exact
+          path="/signup"
+          component={Signup}
+          redirectPath="/parties"
+        />
+
+        <PrivateRoute path="/party-details/:id" component={PartyDetails} />
         <PrivateRoute exact path="/profile/" component={Profile} />
         <PrivateRoute exact path="/edit-user/" component={EditUser} />
 

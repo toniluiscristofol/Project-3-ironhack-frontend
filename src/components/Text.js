@@ -9,3 +9,4 @@ const Text = styled.p`
 `;
 
 export default withTheme(Text);
+

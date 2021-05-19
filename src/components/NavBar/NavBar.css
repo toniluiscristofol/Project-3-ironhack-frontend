@@ -1,0 +1,22 @@
+.post-btn{
+    position: absolute;
+    top: 200px;
+    
+    left: 1200px;
+}
+.icon{
+    position: absolute;
+    top: 0px;
+    left: 400px;
+
+}
+
+.nav-btn{
+    text-transform: none;
+}
+
+*{
+font-family: "Roboto";
+}
+    
+

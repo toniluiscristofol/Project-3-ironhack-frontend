@@ -16,6 +16,7 @@ import {
 import Button from "@material-ui/core/Button";
 import { Link, withRouter } from "react-router-dom";
 import PartyService from "../../services/parties.service";
+import { LocationCitySharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -74,32 +75,11 @@ function NavBar(props) {
   const [city, setCity] = React.useState("");
   const [date, setDate] = React.useState(new Date(Date.now()));
 
-  const partyService = new PartyService();
   
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(city);
-    partyService
-      .getByCity(city)
-      .then((response) => {
-        console.log("Found some parties");
-        props.history.push({
-          pathname: "/parties",
-          state: {parties: response.data}
-          })
-        
-        
-        // this.props.history.push({
-        //   pathname: "/template",
-        //   search: "?query=abc",
-        //   state: { detail: response.data },
-        // });
-      })
-      .catch((err) => console.error(err));
-  };
-  const handleChange = (event) => {
+  
+const handleChange = (event) => {
     setCity(event.target.value);
-    props.findByCity(city)
+    
   };
 
   const handleDateChange = (date) => {
@@ -107,14 +87,11 @@ function NavBar(props) {
     setDate(newDate)
     props.findByDate(date)
      
-    }
-  
-
-  const handleSearch = (event) => {
-    setCity(event.target.value);
   }
-
- 
+  React.useEffect(() => {
+props.findByCity(city)
+  },[city])
+  
 
   return (
     <div className={classes.grow}>
@@ -129,88 +106,73 @@ function NavBar(props) {
             />
           </Link>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon
-                style={{
-                  marginLeft: "200px",
-                  background: "#f50057",
-                  borderRadius: "50%",
-                  padding: "4px",
-                }}
-              />
-            </div>
+            //isHomePage
             {props.isHomePage ? (
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <InputBase
-                  onChange={(e) => handleSearch(e)}
+              <div>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/parties"
+                  className="home-link1"
+                >
+                  <Button variant="outlined" color="secondary">
+                    Browse parties
+                  </Button>
+                </Link>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/signup"
+                  className="home-link2"
+                >
+                  Sign Up
+                </Link>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/login"
+                  className="home-link3"
+                >
+                  Log In
+                </Link>
+              </div>
+            ) : (
+              //PARTYLIST
+
+              <div>
+                <div className={classes.searchIcon}>
+                  <SearchIcon
+                    className="icon"
+                    style={{
+                      background: "#f50057",
+                      borderRadius: "50%",
+                      padding: "4px",
+                    }}
+                  />
+                </div>
+                {/* <input
+                    
+                  className="city-input"
+                  onChange={(e) => handleChange(e)}
                   value={city}
                   name="city"
-                  style={{
+                    style={{
+                    
+                    textAlign: "center",
                     marginLeft: "200px",
                     borderRadius: "30px 0px 0px 30px",
                     width: "15vw",
                     border: "2px solid #c7c7c7",
                     color: "black",
-                    marginTop: "15px",
+                    marginTop: "0px",
                     marginRight: "0px",
                     marginBottom: "10px",
-                    padding: "7px 5px",
+                    padding: "0px 0px",
                     borderRight: "none",
+                    height: "44px",
                   }}
-                  placeholder="Search by city"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    className="input"
-                    style={{
-                      marginLeft: "0px",
-                      marginRight: "100px",
-                      border: "2px solid #c7c7c7",
-                      borderRadius: "0px 30px 30px 0px",
-                      paddingBottom: "8px",
-                    }}
-                    InputProps={{
-                      disableUnderline: true,
-                    }}
-                    disableToolbar
-                    variant="inline"
-                    format="dd/MM/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Search by date"
-                    value={date}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-                <Button
-                  type="submit"
-                  style={{
-                    borderRadius: "30px",
-                    padding: "10px 20px",
-                    position: "absolute",
-                    top: "25px",
-                    right: "0px",
-                    fontSize: "12px",
-                  }}
-                  variant="contained"
-                  color="secondary"
-                  className="post-btn"
-                >
-                  Search
-                </Button>
-              </form>
-            ) : (
-                <div>
-                  <InputBase
+                    placeholder="Search by city"
                     
+                ></input> */}
+                <InputBase
+                  className="city-input"
                   onChange={(e) => handleChange(e)}
                   value={city}
                   name="city"
@@ -220,11 +182,13 @@ function NavBar(props) {
                     width: "15vw",
                     border: "2px solid #c7c7c7",
                     color: "black",
-                    marginTop: "15px",
+                    marginTop: "0px",
                     marginRight: "0px",
                     marginBottom: "10px",
-                    padding: "7px 5px",
+
                     borderRight: "none",
+                    height: "36px",
+                    paddingBottom: "9px",
                   }}
                   placeholder="Search by city"
                   classes={{
@@ -238,10 +202,13 @@ function NavBar(props) {
                     className="input"
                     style={{
                       marginLeft: "0px",
+                      paddingLeft: "12px",
+                      paddingRight: "0px",
                       marginRight: "100px",
                       border: "2px solid #c7c7c7",
                       borderRadius: "0px 30px 30px 0px",
-                      paddingBottom: "8px",
+                      paddingBottom: "0px",
+                      marginTop: "0px",
                     }}
                     InputProps={{
                       disableUnderline: true,
@@ -251,15 +218,15 @@ function NavBar(props) {
                     format="dd/MM/yyyy"
                     margin="normal"
                     id="date-picker-inline"
-                    label="Search by date"
                     value={date}
                     onChange={handleDateChange}
+                    inputStyle={{ textAlign: "center" }}
                     KeyboardButtonProps={{
                       "aria-label": "change date",
                     }}
                   />
                 </MuiPickersUtilsProvider>
-                </div>
+              </div>
             )}
           </div>
           <div className={classes.grow} />
@@ -270,41 +237,27 @@ function NavBar(props) {
                   borderRadius: "30px",
                   padding: "10px 20px",
                   position: "absolute",
-                  top: "25px",
+                  top: "18px",
                   right: "100px",
                   fontSize: "12px",
                 }}
                 variant="outlined"
                 color="secondary"
                 className="post-btn"
+                id="create-btn"
               >
                 Post a party
               </Button>
             </Link>
             <Link style={{ textDecoration: "none" }} to="/profile">
-              <IconButton
-                style={{
-                  background: "#E6E6E6",
-                  marginTop: "10px",
-
-                  marginRight: "10px",
-                  padding: "10px",
-                }}
-                edge="end"
-                aria-label="account of current user"
-                color="default"
-              >
-                <AccountCircle />
-              </IconButton>
+              <img
+                style={{ marginTop: "15px", width: "25px", height: "25px"}}
+                src="/user.png"
+                alt="user-profile"
+              />
             </Link>
           </div>
-          <div className={classes.sectionMobile}>
-            <Link style={{ textDecoration: "none" }} to="/create-party">
-              <IconButton color="inherit">
-                <AccountCircle />
-              </IconButton>
-            </Link>
-          </div>
+          
         </Toolbar>
       </AppBar>
     </div>
