@@ -53,9 +53,9 @@ export default function RecipeReviewCard({title, image, description, date, userp
     <Card id="card2" className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
+          
+            <img id="icons" src="/party-hat.png"></img>
+          
         }
         action={
           <IconButton aria-label="settings">

@@ -119,6 +119,7 @@ class Profile extends Component {
              <PartyCard2 userphoto={this.state.photo} date={parties.date} description={parties.description} title={parties.name} image={parties.images[0] ? parties.images[0] : "https://onlyibizaboatparty.com/img/clubberPack.jpg"}></PartyCard2>
             </Link>
              <button onClick = {() => this.deleteParty(parties.id)} >Delete party</button>
+             <Link to={`/edit-party/${parties.id}`}>Edit Party</Link>
          </div>
           );
         })}
@@ -140,8 +141,7 @@ class Profile extends Component {
 
           );
         })}
-        
-
+    
            </div>
            <button onClick = {() => this.props.logout()} >Log out</button>
 

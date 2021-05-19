@@ -9,12 +9,12 @@ import Navbar from "../../components/NavBar/NavBar"
 import { makeStyles } from "@material-ui/core/styles";
 
 function PartyList(props) {
-  
+
   const [city, setCity] = React.useState("");
   const [parties, setParties] = useState([]);
- 
+
   const [marker, setSelectedMarker] = useState(null)
-  
+
   const[viewport, setViewport] = useState({
     latitude: 41.390205,
     longitude: 2.154007,
@@ -22,7 +22,7 @@ function PartyList(props) {
         height: "100vh",
         zoom: 12
   })
-  
+
   const partyService = new PartyService();
 
   console.log()
@@ -30,29 +30,29 @@ function PartyList(props) {
     partyService
       .get()
       .then((response) => {
-       
+
         setParties(response.data);
 
       })
       .catch((err) => console.error(err));
   }
-  
+
   const findByCity = (query) => {
     if (query.length == 1) {
       return refreshState();
   }
     return setCity(query), setParties(
-        
+
         parties.filter((party) => {
            return party.city.toLowerCase().includes(query.toLowerCase());
         }
-         
+
         )
       );
-    
-    
+
+
   }
-  
+
 
   const findByDate = (date) => {
     return setParties(
@@ -61,47 +61,47 @@ function PartyList(props) {
       })
     )
   }
-  
-  const displayMarkers = () => {
-        
-          parties.map((party) => {
-            {
-              console.log(party);
-            }
-            <Marker latitude={41.403706} longitude={2.173504}>
-              <button
-                className="marker-btn"
-                // onClick={(e) => {
-                //   e.preventDefault();
-                //   setSelectedMarker(marker);
-                // }}
-              >
-                <div>Hey IM A MARKER</div>
-                <img src="https://picsum.photos/200/300" alt="" />
-              </button>
-            </Marker>;
-          });
-        
-    }
-    
 
-  
+  // const displayMarkers = () => {
+
+  //         parties.map((party) => {
+  //           {
+  //             console.log(party);
+  //           }
+  //           <Marker latitude={41.403706} longitude={2.173504}>
+  //             <button
+  //               className="marker-btn"
+  //               // onClick={(e) => {
+  //               //   e.preventDefault();
+  //               //   setSelectedMarker(marker);
+  //               // }}
+  //             >
+  //               <div>Hey IM A MARKER</div>
+  //               <img src="https://picsum.photos/200/300" alt="" />
+  //             </button>
+  //           </Marker>;
+  //         });
+
+  //   }
+
+
+
   useEffect(() => {
-     
+
     refreshState();
-    
+
    }, [])
-   
-  useEffect(() => {
-    displayMarkers();
-  }, [])
-  
+
+  // useEffect(() => {
+  //   displayMarkers();
+  // }, [parties])
+
 
   const displayParties = () => {
-    
-  
+
+
     return parties.map((party) => {
-      
+
       return (
         <div>
           <Link
@@ -110,9 +110,9 @@ function PartyList(props) {
             to={`/party-details/${party.id}`}
           >
             <PartyCard
-              
+
               {...party}
-              
+
             />
           </Link>
         </div>
@@ -120,12 +120,12 @@ function PartyList(props) {
     });
   }
 
-  
 
-  
+
+
     return (
       <div>
-        <div>
+        <div class="navbarfixed">
           <Navbar
             className="navbar"
             findByDate={(time) => findByDate(time)}
@@ -133,9 +133,12 @@ function PartyList(props) {
             isHomePage={false}
           />
         </div>
+        <div id="partiesList">
         <h1 className="title">Parties in {city ? city : "..." }</h1>
 
         <div className="parties">{displayParties()}</div>
+        </div>
+        <div class="mapdiv">
         <ReactMapGL
           className="map"
           {...viewport}
@@ -145,13 +148,18 @@ function PartyList(props) {
           }}
           mapStyle="mapbox://styles/mapbox/streets-v11" //importar de mapbox styles
         >
-          <Marker className="marker" latitude={41.403706} longitude={2.173504}>
+          {/* <Marker className="marker" latitude={parties[0} longitude={2.173504}>
             <div>im a marker</div>
-          </Marker>
-          {displayMarkers()}
+          </Marker> */}
+       {/* {console.log(parties[7].latitude)} */}
+      
           {parties.map((party) => {
-            {console.log(party)}
-            <Marker latitude={41.403706} longitude={2.173504}>
+
+
+            //  let longitudeMy = party.longitude;
+            //  let latitudeMy = party.latitude;
+            return(
+            <Marker latitude={party.latitude} longitude={party.longitude}>
               <button
                 className="marker-btn"
                 // onClick={(e) => {
@@ -159,11 +167,11 @@ function PartyList(props) {
                 //   setSelectedMarker(marker);
                 // }}
               >
-                <div >Hey IM A MARKER</div>
-                <img src="https://picsum.photos/200/300" alt="" />
+                {/* <h1 >Hey IM A MARKER</h1> */}
+                <img style={{width: "40px", height: "40px"}} src="/marcador-de-posicion.png" alt="" />
               </button>
-            </Marker>;
-          })} 
+            </Marker>)
+          })}
           {marker ? (
             <Popup
               latitude={marker.latitude}
@@ -178,8 +186,9 @@ function PartyList(props) {
                 <p>{marker.description}</p>
               </div>
             </Popup>
-          ) : null} 
+          ) : null}
         </ReactMapGL>
+        </div>
       </div>
     );
   }

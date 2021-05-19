@@ -1,6 +1,6 @@
 import React from "react";
 import PartyService from "../../services/parties.service";
-import NavBar from '../NavBar/NavBar';
+import HomeNavBar from '../NavBar/HomeNavBar';
 import "./CreateParty.css";
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
@@ -95,7 +95,7 @@ export default function CreateParty(props) {
 
   return (
     <div>
-    <NavBar></NavBar>
+    <HomeNavBar></HomeNavBar>
     <div className="formpage">
        
     <form className="form" onSubmit={(e) => handleSubmit(e)}>
