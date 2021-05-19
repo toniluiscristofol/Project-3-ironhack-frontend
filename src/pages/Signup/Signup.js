@@ -75,6 +75,7 @@ class Signup extends Component {
   render() {
     const { fields } = this.state;
     return (
+      <div className="signuppage">
       <form onSubmit={(e) => this.handleSubmit(e)}>
         <div className="form-item">
           <label htmlFor="username">Username: </label>
@@ -112,6 +113,7 @@ class Signup extends Component {
           </Button>
         
       </form>
+      </div>
     );
   }
 }
