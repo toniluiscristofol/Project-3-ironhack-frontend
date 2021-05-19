@@ -7,7 +7,9 @@ import { Link, withRouter } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from "react-map-gl"
 import Navbar from "../../components/NavBar/NavBar"
 import { makeStyles } from "@material-ui/core/styles";
-
+import mapboxgl from "!mapbox-gl";
+mapboxgl.workerClass =
+  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 function PartyList(props) {
 
   const [city, setCity] = React.useState("");
