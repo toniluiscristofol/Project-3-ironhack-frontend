@@ -43,12 +43,13 @@ export default function PaymentForm(props) {
 
   const refreshState = (id) => {
 
-    axios.get(`http://localhost:5000/api/parties/${props.id.id}`)
-    .then((response) => {
-        console.log("RESPONSE:DATA:",response.data)
-      setPrice(response.data.price);
-    })
-    .catch((err) => console.error(err));
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/parties/${props.id.id}`)
+      .then((response) => {
+        console.log("RESPONSE:DATA:", response.data);
+        setPrice(response.data.price);
+      })
+      .catch((err) => console.error(err));
 
     // partyService
     //   .getOne(id)

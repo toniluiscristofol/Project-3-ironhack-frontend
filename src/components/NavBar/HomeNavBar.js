@@ -37,7 +37,25 @@ function HomeNavBar(props) {
               >
                 Browse parties
               </Link>
-              {props.isLoggedIn ? null : (
+              {props.isLoggedIn ? (
+                <div>
+                  <Link
+                    className="user-icon"
+                    style={{ textDecoration: "none" }}
+                    to="/profile"
+                  >
+                    <img
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        background: "none",
+                      }}
+                      src="/user.png"
+                      alt=""
+                    />
+                  </Link>
+                </div>
+              ) : (
                 <div>
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
@@ -66,7 +84,7 @@ function HomeNavBar(props) {
             Post a party
           </Link>
         </Toolbar>
-              <Link
+        {/* <Link
                   className="user-icon"
                   style={{ textDecoration: "none" }} to="/profile">
           <img
@@ -74,7 +92,7 @@ function HomeNavBar(props) {
             src="/user.png"
             alt=""
           />
-        </Link>
+        </Link> */}
       </AppBar>
 
       <div />

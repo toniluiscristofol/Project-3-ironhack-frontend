@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import image from "./images/pexels-eberhard-grossgasteiger-2098428.jpg";
+import image from "./images/eric-nopanen-3skLpaOBlMw-unsplash.jpg";
 import Text from '../../components/Text'
 import "./Home.css"
 import SearchBar from '../../components/SearchBar/SearchBar'
@@ -15,29 +15,27 @@ function Home() {
       </div>
 
       <div className="home-wrapper">
-        <ReviewForm />
-        {/* <img display="inline" width="100%" height="100%" src={image} /> */}
-        <h1 display="inline">Discover your next wild night.</h1>
-        <div className="auth-btns">
-          <Link style={{ textDecoration: "none" }} to="/signup">
-            <Button
-              style={{ borderRadius: "30px" }}
-              variant="contained"
-              color="secondary"
-            >
-              Sign Up
-            </Button>
-          </Link>
-          <Link style={{ textDecoration: "none" }} to="/login">
-            <Button
-              style={{ borderRadius: "30px" }}
-              variant="contained"
-              color="secondary"
-            >
-              Log In
-            </Button>
-          </Link>
-        </div>
+        <img
+          className="main-img"
+          display="inline"
+          width="100vw"
+          height="100vh"
+          src={image}
+        />
+        <h1 id="title">Discover your next wild night.</h1>
+
+        <Link style={{ textDecoration: "none" }} to="/parties">
+          <Button
+            id="signup-button"
+            style={{ borderRadius: "5px" }}
+            variant="contained"
+            color="secondary"
+            
+          >
+           
+            Search for parties
+          </Button>
+        </Link>
       </div>
     </div>
   );

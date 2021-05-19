@@ -1,4 +1,4 @@
-.signuppage{
+.signuppage {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,6 +6,7 @@
     min-height: 100vh;
 }
 
-.form-item{
+.form-item {
     margin: 10px;
+    
 }

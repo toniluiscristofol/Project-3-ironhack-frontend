@@ -6,7 +6,7 @@ import "photoswipe/dist/default-skin/default-skin.css";
 
 import "./PartyDetails.css"
 import Button from "@material-ui/core/Button";
-import NavBar from '../../components/NavBar/NavBar';
+import HomeNavBar from '../../components/NavBar/HomeNavBar';
 import { withAuth } from '../../context/auth.context';
 import AuthService from '../../services/auth.service'
 import { Link } from "react-router-dom";
@@ -73,7 +73,7 @@ class PartyDetails extends React.Component {
     const { name, description, images, price, host, ateendees, maxAttendees, street, date, city, id} = this.state;
     return (
       <div>
-          <NavBar></NavBar>
+          <HomeNavBar></HomeNavBar>
           <div className="party-details">
         <h1 className="title">{name}</h1>
         <p></p>

@@ -9,7 +9,7 @@ body {
 }
 
 .main{
-    width: ;
+    
     height: max-content;
 }
 .search-bar{
@@ -18,7 +18,7 @@ body {
 }
 .home-wrapper{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     height:100vh;
@@ -45,5 +45,27 @@ font-size: 12px;
 
 }
     
+#title{
+    position: absolute;
+    top: 250px;
+    right: 420px;
+    color: white;
+    font-size: 55px;
+    
+}
 
+.main-img {
+    width: 100%;
+    height: auto;
+}
 
+#signup-button{
+    position: absolute;
+    top: 350px;
+   right: 700px;
+    padding: 15px;
+    font-size: 20px;
+    
+        text-transform: none;
+    
+}
