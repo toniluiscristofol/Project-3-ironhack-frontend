@@ -2,6 +2,7 @@
 body{
     margin: 0px;
     padding: 0px;
+    
 }
 .navbar{
     position: sticky;
@@ -19,8 +20,9 @@ background: red;
     position: absolute;
     top: 200px;
     left: 20px;
-
+    
 }
+
 
 .title{
     position: absolute;
@@ -28,12 +30,17 @@ background: red;
     left: 30px;
 }
 
-.map{
-    position: -webkit-sticky;
+.mapdiv{
+    margin-top: 1.8cm;
+    position: absolute;
     top: 5px;
-    left: 800px;
+    left: 750px;
+    position: fixed;
 }
-
+.map{
+    width: 400px;
+    
+}
 .marker-btn{
     background: none;
     border: none;
@@ -44,3 +51,16 @@ background: red;
     width: 100px;
     height: 100px;
 }
+
+/* .overlays{
+    position: absolute;
+    top: 5px;
+    left: 800px;
+} */
+
+.navbarfixed{
+    position: fixed;
+
+z-index: 99;
+} 
+

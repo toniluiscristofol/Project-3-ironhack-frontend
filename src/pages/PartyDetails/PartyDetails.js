@@ -77,11 +77,11 @@ class PartyDetails extends React.Component {
           <div className="party-details">
         <h1 className="title">{name}</h1>
         <p></p>
-        <p></p>
-        <span className="calendar">{date.substring(0,15)}</span>
-        <span>
+        <p id="date">{date.substring(0,15)}</p>
+       
+        {/* <span>
         <Link to={`/edit-party/${this.props.match.params.id}`}><Button >Edit Party</Button></Link>
-        </span>
+        </span> */}
         
         <div className="gallery">
           <img
