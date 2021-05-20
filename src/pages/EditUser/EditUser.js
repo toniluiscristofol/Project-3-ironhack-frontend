@@ -41,11 +41,11 @@ class EditUser extends Component {
     event.preventDefault();
     console.log(this.state.fields);
     const uploadData = new FormData();
-    //uploadData.append('nombre de la clave', 'valor');
+    
     Object.keys(this.state.fields).forEach(key => {
       uploadData.append(key, this.state.fields[key]);
     })
-
+    
     this.props.edit(uploadData);
   }
 
@@ -77,7 +77,7 @@ class EditUser extends Component {
           <label htmlFor="photo">Photo: </label>
           <input type="file" name="photo" onChange={(e) => this.handleChange(e)} />
         </div>
-        <Link style={{ textDecoration: "none" }} to="/profile"> <button type="submit">EDIT</button></Link>
+         <button type="submit">EDIT</button>
        
       </form>
     )

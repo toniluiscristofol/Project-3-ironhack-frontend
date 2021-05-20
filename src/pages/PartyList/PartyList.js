@@ -7,9 +7,10 @@ import { Link, withRouter } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from "react-map-gl"
 import Navbar from "../../components/NavBar/NavBar"
 import { makeStyles } from "@material-ui/core/styles";
-import mapboxgl from "!mapbox-gl";
-mapboxgl.workerClass =
-  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+import Map from "../../components/Map/Map"
+// import mapboxgl from "!mapbox-gl";
+// mapboxgl.workerClass =
+//   require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 function PartyList(props) {
 
   const [city, setCity] = React.useState("");
@@ -27,7 +28,7 @@ function PartyList(props) {
 
   const partyService = new PartyService();
 
-  console.log()
+  
   const refreshState = () => {
     partyService
       .get()
@@ -136,12 +137,13 @@ function PartyList(props) {
           />
         </div>
         <div id="partiesList">
-        <h1 className="title">Parties in {city ? city : "..." }</h1>
+          <h1 className="title">Parties in {city ? city : "..."}</h1>
 
-        <div className="parties">{displayParties()}</div>
+          <div className="parties">{displayParties()}</div>
         </div>
         <div class="mapdiv">
-        <ReactMapGL
+          <Map parties={parties}/>
+          {/* <ReactMapGL
           className="map"
           {...viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -153,9 +155,9 @@ function PartyList(props) {
           {/* <Marker className="marker" latitude={parties[0} longitude={2.173504}>
             <div>im a marker</div>
           </Marker> */}
-       {/* {console.log(parties[7].latitude)} */}
-      
-          {parties.map((party) => {
+          {/* {console.log(parties[7].latitude)} */}
+
+          {/* {parties.map((party) => {
 
 
             //  let longitudeMy = party.longitude;
@@ -169,27 +171,9 @@ function PartyList(props) {
                 //   setSelectedMarker(marker);
                 // }}
               >
-                {/* <h1 >Hey IM A MARKER</h1> */}
-                <img style={{width: "40px", height: "40px"}} src="/marcador-de-posicion.png" alt="" />
-              </button>
-            </Marker>)
-          })}
-          {marker ? (
-            <Popup
-              latitude={marker.latitude}
-              longitude={marker.longitude}
-              onClose={() => {
-                setSelectedMarker(null);
-              }}
-            >
-              <div>
-                {" "}
-                <h2>{marker.name}</h2>
-                <p>{marker.description}</p>
-              </div>
-            </Popup>
-          ) : null}
-        </ReactMapGL>
+                {/* <h1 >Hey IM A MARKER</h1>
+                </ReactMapGL> 
+                 */}
         </div>
       </div>
     );

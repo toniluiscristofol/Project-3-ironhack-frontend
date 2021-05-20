@@ -68,7 +68,7 @@ class Login extends Component {
     return (
       <div className="signuppage">
         <HomeNavBar />
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <form id="login-form" onSubmit={(e) => this.handleSubmit(e)}>
           <label htmlFor="email">
             <b>Email</b>
           </label>
@@ -92,7 +92,12 @@ class Login extends Component {
             />
           </div>
         </form>
-        <Button type="submit" variant="contained" color="secondary">
+        <Button
+          form="login-form"
+          type="submit"
+          variant="contained"
+          color="secondary"
+        >
           Log In
         </Button>
       </div>

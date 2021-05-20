@@ -77,10 +77,9 @@ class Signup extends Component {
   render() {
     const { fields } = this.state;
     return (
-      
       <div className="signuppage">
         <HomeNavBar />
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <form id="signup-form" onSubmit={(e) => this.handleSubmit(e)}>
           <label htmlFor="username">
             <b>Username</b>
           </label>
@@ -119,10 +118,10 @@ class Signup extends Component {
               onChange={(e) => this.handleChange(e)}
             />
           </div>
+          <Button form="signup-form" type="submit" variant="contained" color="secondary">
+            Sign Up
+          </Button>
         </form>
-        <Button type="submit" variant="contained" color="secondary">
-          Sign Up
-        </Button>
       </div>
     );
   }

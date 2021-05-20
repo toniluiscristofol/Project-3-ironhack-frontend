@@ -38,7 +38,7 @@ class Profile extends Component {
     console.log("this.state.parties", this.state.parties)
     this.authService.isLoggedIn()
       .then(response => {
-        console.log("LLEGAN BIEN LOS response.data",response.data);
+        
         this.setState({ username: response.data.username, photo: response.data.photo});
       })
       .catch(err => console.error(err))
@@ -46,9 +46,9 @@ class Profile extends Component {
     this.partyService.getUserParties(id)
       .then(response => {
     
-        console.log(response.data)
+        
         this.setState({parties: response.data})
-          console.log("STATE AFTER DATA", this.state.parties)
+          
        
       })  
       .catch(err => console.log("HOLA SOy UN ERROR DEL SEGUNDO RESPONSE"))
@@ -56,19 +56,14 @@ class Profile extends Component {
       this.partyService.getUserAttendancees(id)
       .then(response => {
     
-        console.log(response.data)
+       
         this.setState({attendancees: response.data})
-          console.log("I AM GOING TO THESE PARTYS", this.state.parties)
+          
        
       })  
       .catch(err => console.log("HOLA SOy UN ERROR DEL SEGUNDO RESPONSE"))
 
-    // this.partyService.getUserAttendancees(id)
-    // .then(response => {
-    //     console.log(response.data)
-    //     this.setState({attendancees: response.data})
-    // })
-    // .catch(err => console.log(err))
+    
 
     
   }
@@ -116,7 +111,7 @@ class Profile extends Component {
            return (
             <div className="partiescreated">
             <Link id="cards-party2" to={`/party-details/${parties.id}`}>
-             <PartyCard2 userphoto={this.state.photo} date={parties.date} description={parties.description} title={parties.name} image={parties.images[0] ? parties.images[0] : "https://onlyibizaboatparty.com/img/clubberPack.jpg"}></PartyCard2>
+                 <PartyCard2 userphoto={this.state.photo} date={parties.date} description={parties.description} title={parties.name} host={parties.host }image={parties.images[0] ? parties.images[0] : "https://onlyibizaboatparty.com/img/clubberPack.jpg"}></PartyCard2>
             </Link>
              <button onClick = {() => this.deleteParty(parties.id)} >Delete party</button>
              <Link to={`/edit-party/${parties.id}`}>Edit Party</Link>
@@ -130,16 +125,22 @@ class Profile extends Component {
            <div className="section">
            {this.state.attendancees.slice(this.state.attendancees.length-4).map((parties) => {
            return (
-            <div className="partiescreated">
-            <Link id="cards-party2" to={`/party-details/${parties.id}`}>
-             <PartyCard2 userphoto={this.state.photo}  description={parties.description} title={parties.name} image={parties.images[0] ? parties.images[0] : "https://onlyibizaboatparty.com/img/clubberPack.jpg"}></PartyCard2>
-            
-            </Link>
-             
-             
-         </div>
-
-          );
+             <div className="partiescreated">
+               <Link id="cards-party2" to={`/party-details/${parties.id}`}>
+                 <PartyCard2
+                   userphoto={this.state.photo}
+                   description={parties.description}
+                   title={parties.name}
+                   host={parties.host}
+                   image={
+                     parties.images[0]
+                       ? parties.images[0]
+                       : "https://onlyibizaboatparty.com/img/clubberPack.jpg"
+                   }
+                 ></PartyCard2>
+               </Link>
+             </div>
+           );
         })}
     
            </div>

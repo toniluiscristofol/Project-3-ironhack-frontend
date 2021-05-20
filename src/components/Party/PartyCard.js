@@ -36,8 +36,10 @@ export default function Party({ name, street, images, price,date, attendees, max
             <CardContent className="content">
               <b>{name}</b>{" "}
               <span>
-                {}
-                {date.substring(0, 15)}
+                
+                {date.substring(8, 10)}-
+                {date.substring(5, 7)}-
+                {date.substring(0, 4)}
               </span>
               <hr className="hr1" />
               <span>
