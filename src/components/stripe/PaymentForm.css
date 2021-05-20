@@ -30,6 +30,7 @@
 	align-items: center;
     margin-left: 15px;
     border-top: none;
+    width: 100%;
 	
 }
 
@@ -43,7 +44,7 @@
 }
 
 
-#paybutton{
+/* #paybutton{
     background-color: rgb(237, 72, 86);
     border-radius: 4px;
     width: 400px;
@@ -68,4 +69,4 @@
     align-items: center;
     justify-content: center;
     color:rgb(237, 72, 86);
-}
+} */

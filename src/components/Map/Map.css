@@ -1,0 +1,16 @@
+.map-container{
+    width: 47.5vw;
+    position: fixed;
+    right: 0px;
+    height: 100vh;
+    cursor: grab;
+}
+
+.marker {
+    background-image: url('https://img-premium.flaticon.com/png/512/684/684908.png?token=exp=1621508028~hmac=9c3e4fb0ea4a8025b8ad393b5641a5b6');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}

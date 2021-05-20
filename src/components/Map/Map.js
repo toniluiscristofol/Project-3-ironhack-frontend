@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import "./Map.css"
 
 import mapboxgl from "mapbox-gl/dist/mapbox-gl-csp";
+import "mapbox-gl/dist/mapbox-gl.css";
+
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
 mapboxgl.workerClass = MapboxWorker;
@@ -10,14 +13,14 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: 2.0195,
-      lat: 41.5633,
+      lng: 2.154007,
+      lat: 41.390205,
       zoom: 12,
     };
     this.mapContainer = React.createRef();
     
   }
-  componentDidMount() {
+  componentDidMount(props) {
     const { lng, lat, zoom } = this.state;
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
@@ -25,11 +28,16 @@ class Map extends Component {
       center: [lng, lat],
       zoom: zoom,
     });
-    console.log(this.props.cooking);
-    this.props.parties.forEach((marker) => {
-      let popup = new mapboxgl.Popup().setText(`${marker.name}`).addTo(map);
-      new mapboxgl.Marker({ color: "#FF0000" })
-        .setLngLat(marker.coordinates)
+      
+    
+      
+          
+      
+    this.props.parties.forEach((party) => {
+        let popup = new mapboxgl.Popup().setText(`${party.name}`).addTo(map);
+        
+      new mapboxgl.Marker({ color: "red" })
+        .setLngLat([party.longitude, party.latitude])
         .addTo(map)
         .setPopup(popup);
     });
