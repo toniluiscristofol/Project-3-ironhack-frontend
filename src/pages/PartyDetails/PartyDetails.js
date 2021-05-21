@@ -187,7 +187,7 @@ class PartyDetails extends React.Component {
             </div>
             <div className="jointhisparty">
               <div id="price"> {price}€</div>
-              <p>Payment is securely processed by stripe</p>
+              <p>Payment is securely processed by stripe. By confirming this payment, you agree with our terms and services. Refunds are allowed withing 30 days of purchase. Please contact us for more information.</p>
               <Link to={`/stripe/${this.props.match.params.id}`}>
                 <Button
                   onClick={() =>

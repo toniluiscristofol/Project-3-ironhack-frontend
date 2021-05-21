@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Profile from '../../pages/Profile/Profile';
 import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom"
 import {
   CardElement,
   useElements,
@@ -104,17 +105,19 @@ export default function PaymentForm(props) {
   return (
     <>
       {!succes ? (
-          <div>
-        
-        <form class="payForm" onSubmit={handleSubmit}>
-        <img id="logopayment"src="/PILLOWTALK (3) (2).png"></img>
-          <fieldset className="FormGroup">
-            <div className="FormRow">
-              <CardElement options={CARD_OPTIONS} />
-            </div>
-          </fieldset>
-      <button id="paybutton" >Pay {price}€</button>
-        </form>
+        <div>
+          <form class="payForm" onSubmit={handleSubmit}>
+            <img id="logopayment" src="/PILLOWTALK (3) (2).png"></img>
+            <fieldset className="FormGroup">
+              <div className="FormRow">
+                <CardElement options={CARD_OPTIONS} />
+              </div>
+            </fieldset>
+
+            <Link style={{ textDecoration: "none" }} to="/profile">
+              <button id="paybutton">Pay {price}€</button>
+            </Link>
+          </form>
         </div>
       ) : (
         // <div class="succesfullpayment">
@@ -123,7 +126,7 @@ export default function PaymentForm(props) {
         //   <h2>
         //     SUCCESFULL PAYMENT: YOU JOINED THIS PARTY!!!!!
         //   </h2>
-        // 
+        //
         // </div>
         <Profile></Profile>
       )}

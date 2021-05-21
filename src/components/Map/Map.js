@@ -20,7 +20,7 @@ class Map extends Component {
     this.mapContainer = React.createRef();
     
   }
-  componentDidMount(props) {
+  componentWillReceiveProps(props) {
     const { lng, lat, zoom } = this.state;
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
@@ -30,10 +30,12 @@ class Map extends Component {
     });
       
     
+        
+    
       
           
       
-    this.props.parties.forEach((party) => {
+    props.parties.forEach((party) => {
         let popup = new mapboxgl.Popup().setText(`${party.name}`).addTo(map);
         
       new mapboxgl.Marker({ color: "red" })
