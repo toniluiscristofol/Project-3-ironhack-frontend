@@ -11,7 +11,7 @@ function Home() {
   return (
     <div className="main">
       <div className="navbar">
-        <HomeNavBar findByCity={() => console.log("hello")} isHomePage={true} />
+        <HomeNavBar id="navBBB" findByCity={() => console.log("hello")} isHomePage={true} />
       </div>
 
       <div className="home-wrapper">

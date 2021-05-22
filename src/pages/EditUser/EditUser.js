@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import "./EditUser.css"
 import { withAuth } from '../../context/auth.context';
 
 
@@ -67,6 +68,7 @@ class EditUser extends Component {
   render() {
     const { fields } = this.state;
     return (
+      <div id="edituser">
       <form onSubmit={(e) => this.handleSubmit(e)}>
         <div className="form-item">
           <label htmlFor="username">Username: </label>
@@ -80,6 +82,7 @@ class EditUser extends Component {
         <Link style={{ textDecoration: "none" }} to="/profile"> <button type="submit">EDIT</button></Link>
        
       </form>
+      </div>
     )
   }
 }

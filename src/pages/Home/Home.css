@@ -47,3 +47,7 @@ font-size: 12px;
     
 
 
+.navBBB{
+    position: fixed;
+    z-index: 99;
+}

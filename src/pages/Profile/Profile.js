@@ -91,7 +91,9 @@ class Profile extends Component {
     
          <div className="cover">
              <div className="grey">
-               
+             <p id="username">{this.state.username}</p>
+             <button id="logoutbutton" onClick = {() => this.props.logout()} >Log out</button>
+       
            </div>
            <div className="white">
            </div>
@@ -99,8 +101,8 @@ class Profile extends Component {
            <img id="profileimage" src={this.state.photo} style={{width:"200px"}}>
             </img> 
             <Link to="edit-user">
-            <button style={{width:"200px"}}>
-             edit user
+            <button id ="edituser" style={{width:"200px"}}>
+             Edit user
             </button>
           
             </Link>
@@ -118,8 +120,10 @@ class Profile extends Component {
             <Link id="cards-party2" to={`/party-details/${parties.id}`}>
              <PartyCard2 userphoto={this.state.photo} date={parties.date} description={parties.description} title={parties.name} image={parties.images[0] ? parties.images[0] : "https://onlyibizaboatparty.com/img/clubberPack.jpg"}></PartyCard2>
             </Link>
-             <button onClick = {() => this.deleteParty(parties.id)} >Delete party</button>
-             <Link to={`/edit-party/${parties.id}`}>Edit Party</Link>
+            <div id="editdelete">
+             <button id="delete" onClick = {() => this.deleteParty(parties.id)} >Delete party</button>
+             <Link id="edit" to={`/edit-party/${parties.id}`}>Edit Party</Link>
+             </div>
          </div>
           );
         })}
@@ -143,7 +147,7 @@ class Profile extends Component {
         })}
     
            </div>
-           <button onClick = {() => this.props.logout()} >Log out</button>
+          
 
     </div>
         

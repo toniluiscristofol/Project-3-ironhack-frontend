@@ -31,6 +31,7 @@ export default function Party({ name, street, images, price,date, attendees, max
               component="img"
               alt="party-image"
               height="200"
+              width="200"
               image={images[0]}
             />
             <CardContent className="content">
