@@ -41,10 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({title, image, description, date, userphoto}) {
+export default function RecipeReviewCard({title, image, description, host}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  console.log(host)
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -54,7 +55,7 @@ export default function RecipeReviewCard({title, image, description, date, userp
       <CardHeader
         avatar={
           
-            <img id="icons" src="/party-hat.png"></img>
+          <img style={{borderRadius: "50%"}}width="50px" height="50px" src={host.photo}></img>
           
         }
         action={

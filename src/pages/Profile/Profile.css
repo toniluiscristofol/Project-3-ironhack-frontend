@@ -73,6 +73,7 @@ justify-content: flex-start;
 #profileimage{
   border: 5px solid rgb(255, 255, 255);
   border-radius: 4px;
+  object-fit:cover;
   
 }
 

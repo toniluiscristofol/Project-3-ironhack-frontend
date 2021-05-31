@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d0efbd5c.chunk.css",
+    "main.js": "/static/js/main.d162fa9a.chunk.js",
+    "main.js.map": "/static/js/main.d162fa9a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.90bcee93.js",
+    "runtime-main.js.map": "/static/js/runtime-main.90bcee93.js.map",
+    "static/css/2.595d3330.chunk.css": "/static/css/2.595d3330.chunk.css",
+    "static/js/2.84f6ce3e.chunk.js": "/static/js/2.84f6ce3e.chunk.js",
+    "static/js/2.84f6ce3e.chunk.js.map": "/static/js/2.84f6ce3e.chunk.js.map",
+    "static/js/3.e1eed652.chunk.js": "/static/js/3.e1eed652.chunk.js",
+    "static/js/3.e1eed652.chunk.js.map": "/static/js/3.e1eed652.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.595d3330.chunk.css.map": "/static/css/2.595d3330.chunk.css.map",
+    "static/css/main.d0efbd5c.chunk.css.map": "/static/css/main.d0efbd5c.chunk.css.map",
+    "static/js/2.84f6ce3e.chunk.js.LICENSE.txt": "/static/js/2.84f6ce3e.chunk.js.LICENSE.txt",
+    "static/js/mapbox-gl-csp-worker.182805d5.worker.js": "/static/js/mapbox-gl-csp-worker.182805d5.worker.js",
+    "static/js/mapbox-gl-csp-worker.182805d5.worker.js.map": "/static/js/mapbox-gl-csp-worker.182805d5.worker.js.map",
+    "static/media/App.css": "/static/media/Gelion-Regular.f96d1bba.ttf",
+    "static/media/default-skin.css": "/static/media/default-skin.f64c3af3.svg",
+    "static/media/eric-nopanen-3skLpaOBlMw-unsplash.fff481f0.jpg": "/static/media/eric-nopanen-3skLpaOBlMw-unsplash.fff481f0.jpg",
+    "static/media/index.css": "/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.90bcee93.js",
+    "static/css/2.595d3330.chunk.css",
+    "static/js/2.84f6ce3e.chunk.js",
+    "static/css/main.d0efbd5c.chunk.css",
+    "static/js/main.d162fa9a.chunk.js"
+  ]
+}

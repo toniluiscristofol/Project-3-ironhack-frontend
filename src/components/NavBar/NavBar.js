@@ -137,7 +137,7 @@ props.findByCity(city)
               //PARTYLIST
 
               <div>
-                <div className={classes.searchIcon}>
+                {/* <div className={classes.searchIcon}>
                   <SearchIcon
                     className="icon"
                     style={{
@@ -145,8 +145,8 @@ props.findByCity(city)
                       borderRadius: "50%",
                       padding: "4px",
                     }}
-                  />
-                </div>
+                  /> */}
+                {/* </div> */}
                 {/* <input
                     
                   className="city-input"
